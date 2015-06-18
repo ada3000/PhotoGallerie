@@ -1,0 +1,111 @@
+﻿body {
+    background-color: #222222;
+}
+
+a img {
+    border: none;
+}
+
+.img {
+    position:relative;
+    width: 160px;
+    height: 120px;
+    overflow: hidden;
+    margin: 5px;
+    border: solid 2px transparent;
+    float: left;
+
+    background: url(Images/image.png) no-repeat center center;
+    background-size: 50px;
+}
+
+    .img a {
+        display: block;
+        text-align: center;
+        vertical-align: central;
+
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+    }
+
+    .img:hover {
+        border: solid 2px #f06c22;
+    }
+
+
+    .img.folder
+    {
+        background: url(Images/folder.png) no-repeat center top;
+        background-size: 85px;
+    }
+    .img .label
+    {
+        display:block;
+        position:absolute;
+        bottom:0;
+        left:0;
+        right:0;
+        height: 35px;
+        color: white;
+        overflow: hidden;
+        _text-overflow:ellipsis;
+        _white-space:nowrap;    
+        vertical-align:central;    
+    }
+
+    .photo-dialog .overlay
+    {
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        background-color: black;
+        opacity: 0.8
+    }
+
+    .photo-dialog
+    {
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+    }
+    .close-button
+    {
+        position:absolute;
+        top:20px;
+        right:20px;
+        width: 32px;
+        height: 32px;
+        cursor:pointer;
+        background:url(Images/close.png) no-repeat top left;
+    }
+
+    .prev-button
+    {
+        position:absolute;
+        top:0px;
+        left:20px;
+        bottom:0px;
+        width: 32px;
+        cursor:pointer;
+        background:url(Images/prev.png) no-repeat center left;
+        background-size: 32px;
+    }
+
+    .next-button
+    {
+        position:absolute;
+        top:0px;
+        right:20px;
+        bottom:0px;
+        width: 32px;
+        cursor:pointer;
+        background:url(Images/next.png) no-repeat center left;
+        background-size: 32px;
+    }
