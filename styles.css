@@ -1,5 +1,7 @@
 ﻿body {
     background-color: #222222;
+    font-family: 'Times New Roman';
+    font-size: 1em;
 }
 
 a img {
@@ -48,7 +50,7 @@ a img {
         bottom:0;
         left:0;
         right:0;
-        height: 35px;
+        height: 40px;
         color: white;
         overflow: hidden;
         _text-overflow:ellipsis;
