@@ -15,14 +15,13 @@ namespace PhotoGalerie
         private string imgFullTemplate = "image.aspx?w=0&h=0&file={0}&folder={1}";
 
         //private string Folder = @"D:\Фото\2015\(06) Июнь 10-11";
-        private string Folder = @"D:\Фото\2015";
         protected void Page_Load(object sender, EventArgs e)
         {
             //var absPath = Server.MapPath("~");
             //var filenameChain = Request.FilePath.Split('/');
             //var pageFolder = absPath + "\\" + string.Join("\\", filenameChain.Skip(2).Take(filenameChain.Count() - 3));
 
-            var pageFolder = Folder;
+            var pageFolder = Config.BaseFolder;
             //Response.Write(pageFolder);
             string folderParam = Request.QueryString.Get("folder") ?? "";
 

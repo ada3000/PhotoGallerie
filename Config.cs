@@ -12,7 +12,7 @@ namespace PhotoGalerie
         {
             get
             {
-                return @"D:\Фото\2015";
+                return System.Configuration.ConfigurationManager.AppSettings["folder"];
             }
         }
     }

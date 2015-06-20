@@ -69,6 +69,7 @@
     <Content Include="Images\close.png" />
     <Content Include="Images\folder.png" />
     <Content Include="Images\image.png" />
+    <Content Include="Images\loader.gif" />
     <Content Include="Images\next.png" />
     <Content Include="Images\prev.png" />
     <Content Include="Index.aspx" />

@@ -12,7 +12,6 @@ namespace PhotoGalerie
 {
     public partial class ImagePage : System.Web.UI.Page
     {
-        private string Folder = @"D:\Фото\2015";
         protected void Page_Load(object sender, EventArgs e)
         {
             Response.ContentType = "image/jpeg";
