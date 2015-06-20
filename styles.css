@@ -101,11 +101,39 @@ a img {
     .next-button
     {
         position:absolute;
-        top:0px;
+        top:52px;
         right:20px;
         bottom:0px;
         width: 32px;
         cursor:pointer;
         background:url(Images/next.png) no-repeat center left;
         background-size: 32px;
+    }
+
+    .preview-image
+    {
+        position:absolute;
+        left: 52px;
+        right: 52px;
+        top:20px;
+        bottom:20px;
+        text-align: center;
+
+        background: url(Images/loader.gif) no-repeat center center;
+    }
+
+    .image-info
+    {
+         position:absolute;
+        left: 20px;
+        top:20px;
+        height: 30px;
+
+        font-size:16px;
+        color:#ee7c36;
+    }
+    .preview-image img
+    {
+        height: 100%;
+        cursor: pointer;
     }

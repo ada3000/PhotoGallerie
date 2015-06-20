@@ -70,9 +70,12 @@
     <Content Include="Images\folder.png" />
     <Content Include="Images\image.png" />
     <Content Include="Images\next.png" />
+    <Content Include="Images\prev.png" />
     <Content Include="Index.aspx" />
     <Content Include="Image.aspx" />
     <Content Include="image2.aspx" />
+    <Content Include="Js\gellerie.js" />
+    <Content Include="Js\jquery-2.1.4.min.js" />
     <Content Include="styles.css" />
     <Content Include="Web.config" />
   </ItemGroup>

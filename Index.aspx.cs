@@ -70,7 +70,7 @@ namespace PhotoGalerie
                 string.Format(imgPreviewTemplate, fileName, folderParam), 
                 string.Format(imgShowTemplate, fileName, folderParam), 
                 true,
-                "image");
+                "image js-image");
         }
 
         private void AddFolder(string name, string id)
