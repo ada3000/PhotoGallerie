@@ -32,6 +32,9 @@ namespace PhotoGalerie
 
             if (width == 0 && height == 0)
             {
+                //Show save as dialog
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + file);
+
                 using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
                 {
                     int cnt = 0;

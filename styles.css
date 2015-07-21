@@ -2,6 +2,7 @@
     background-color: #222222;
     font-family: 'Times New Roman';
     font-size: 1em;
+    color: white;
 }
 
 a img {
@@ -138,4 +139,13 @@ a img {
     {
         height: 100%;
         cursor: pointer;
+    }
+    .download-button
+    {
+        position: absolute;
+        cursor:pointer;
+        top:15px;
+        left:80px;
+        padding: 5px;
+        border: solid 1px white;
     }

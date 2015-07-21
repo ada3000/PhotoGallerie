@@ -67,20 +67,23 @@ namespace PhotoGalerie
             AddItem("", 
                 fileName, 
                 string.Format(imgPreviewTemplate, fileName, folderParam), 
-                string.Format(imgShowTemplate, fileName, folderParam), 
+                string.Format(imgShowTemplate, fileName, folderParam),
+                string.Format(imgFullTemplate, fileName, folderParam), 
                 true,
                 "image js-image");
         }
 
         private void AddFolder(string name, string id)
         {
-            AddItem(name, name, @"Images/1.gif", "?folder=" + id, false, "folder");
+            AddItem(name, name, @"Images/1.gif", "?folder=" + id, "", false, "folder");
         }
 
-        private void AddItem(string name, string title, string previewImageUrl, string navigateUrl, bool newWindow, string cssClass = "")
+        private void AddItem(string name, string title, string previewImageUrl, string navigateUrl, string downloadUrl, bool newWindow, string cssClass = "")
         {
             Panel pan = new Panel { CssClass = "img " + cssClass };
             HyperLink link = new HyperLink { Target = newWindow ? "_blank" : "", NavigateUrl = navigateUrl, ToolTip = title };
+            link.Attributes.Add("download-url", downloadUrl);
+
             Image img = new Image { AlternateText = title, ImageUrl = previewImageUrl };
             Label lb = new Label { CssClass = "label", Text = name };
 

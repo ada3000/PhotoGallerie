@@ -27,6 +27,7 @@
         <div class="prev-button js-prev">&nbsp;</div>
         <div class="next-button js-next">&nbsp;</div>
         
+        <div class="download-button js-download">Download</div>
     </div>
 </body>
 </html>

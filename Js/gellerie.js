@@ -6,6 +6,7 @@
             closeButton: ".js-close",
             prevButton: ".js-prev",
             nextButton: ".js-next",
+            downloadButton: ".js-download",
 
             imageItem: ".js-image a",
 
@@ -43,22 +44,32 @@
         var items = [];
         $(Css.imageItem).each(function ()
         {
-            items.push(this.href);
+            items.push($(this).data("image-url"));
         });
 
         return items;
     };
 
+    function downloadClick(ev)
+    {
+        location.href = imageDialog.downloadUrl;
+        //window.open(imageDialog.downloadUrl);        
+    };
+
     function imageItemClick(ev)
     {
-        console.debug("imageItemClick " + ev.currentTarget.href);
+        var downloadUrl = $(ev.currentTarget).attr("download-url");
+        var imageUrl = $(ev.currentTarget).data("image-url");
 
-        showImage(ev.currentTarget.href);
+        console.debug("imageItemClick " + imageUrl);
+
+
+        showImage(imageUrl, downloadUrl);
 
         return false;
     };
 
-    function showImage(url)
+    function showImage(url, downloadUrl)
     {
         $(Css.dialog).show();
         var img = $("<img src='" + url + "'/>");
@@ -68,6 +79,7 @@
         img.click(nextClick);
 
         imageDialog.current = url;
+        imageDialog.downloadUrl = downloadUrl;
 
         updateImageInfo();
     };
@@ -88,14 +100,23 @@
 
     $(Css.nextButton, Css.dialog).click(nextClick);
     $(Css.prevButton, Css.dialog).click(prevClick);
+    $(Css.downloadButton, Css.dialog).click(downloadClick);
     $(Css.closeButton, Css.dialog).click(closeClick);
 
     $(Css.imageItem).click(imageItemClick);
+
+    $(Css.imageItem).each(function()
+    {
+        var a = $(this);
+        a.data("image-url", this.href);
+        a.href = "javascript:void(0);";
+    })
 
     window.imageDialog =
         {
             items: findImageItems(),
             current: "",
+            downloadUrl:""
         };
 
 
