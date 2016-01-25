@@ -1,4 +1,10 @@
-﻿$(document).ready(function()
+﻿if (!window.console)
+    window.console = { debug: function () { }, error: function () { } };
+
+if (!window.console.debug)
+    window.console.debug = function () { };
+
+$(document).ready(function ()
 {
     var Css =
         {
