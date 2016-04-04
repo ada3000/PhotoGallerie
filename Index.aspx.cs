@@ -14,6 +14,10 @@ namespace PhotoGalerie
         private string imgShowTemplate = "image.aspx?w=1024&h=768&file={0}&folder={1}";
         private string imgFullTemplate = "image.aspx?w=0&h=0&file={0}&folder={1}";
 
+        private string EmptyIcon = @"Images/1.gif";
+
+        private string videoPriviewUrl = "Images/video.png";
+
         //private string Folder = @"D:\Фото\2015\(06) Июнь 10-11";
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -56,10 +60,31 @@ namespace PhotoGalerie
             {
                 string fileName = s.Substring(s.LastIndexOf("\\") + 1);
                 string fileNameL = fileName.ToLower();
-                if (fileNameL.IndexOf(".jpg") == -1 && fileNameL.IndexOf(".png") == -1) continue;
+                string fileExt = fileName.Split('.').Last();
 
-                AddImage(fileName, folderParam);
+                if (Config.PhotoExtensions.Contains(fileExt))
+                    AddImage(fileName, folderParam);
+
+                if (Config.VideoExtensions.Contains(fileExt))
+                    AddVideo(fileName, folderParam);
+
+                if (Config.DataExtensions.Contains(fileExt))
+                    AddData(fileName, folderParam);
             }
+        }
+
+        private void AddData(string fileName, string folderParam)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void AddVideo(string fileName, string folderParam)
+        {
+            AddItem(fileName,
+                fileName,
+                 EmptyIcon, videoPriviewUrl, videoPriviewUrl,
+                true,
+                "video js-image js-video");
         }
 
         private void AddImage(string fileName, string folderParam)
@@ -75,7 +100,7 @@ namespace PhotoGalerie
 
         private void AddFolder(string name, string id)
         {
-            AddItem(name, name, @"Images/1.gif", "?folder=" + id, "", false, "folder");
+            AddItem(name, name, EmptyIcon, "?folder=" + id, "", false, "folder");
         }
 
         private void AddItem(string name, string title, string previewImageUrl, string navigateUrl, string downloadUrl, bool newWindow, string cssClass = "")

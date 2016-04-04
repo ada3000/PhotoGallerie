@@ -18,5 +18,32 @@ namespace PhotoGalerie
                 return Path.Combine(fi.Directory.FullName, System.Configuration.ConfigurationManager.AppSettings["folder"]);
             }
         }
+
+        private static string[] _photoExtensions;
+        public static string[] PhotoExtensions
+        {
+            get
+            {
+                return _photoExtensions ?? (_photoExtensions=System.Configuration.ConfigurationManager.AppSettings["photoExtensions"].Split(','));                
+            }
+        }
+
+        private static string[] _videoExtensions;
+        public static string[] VideoExtensions
+        {
+            get
+            {
+                return _videoExtensions ?? (_videoExtensions = System.Configuration.ConfigurationManager.AppSettings["videoExtensions"].Split(','));
+            }
+        }
+
+        private static string[] _dataExtensions;
+        public static string[] DataExtensions
+        {
+            get
+            {
+                return _dataExtensions ?? (_dataExtensions = System.Configuration.ConfigurationManager.AppSettings["dataExtensions"].Split(','));
+            }
+        }
     }
 }
