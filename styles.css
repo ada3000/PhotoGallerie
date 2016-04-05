@@ -127,6 +127,8 @@ a img {
         bottom:20px;
         text-align: center;
 
+        overflow: hidden;
+
         background: url(Images/loader.gif) no-repeat center center;
     }
 
@@ -140,11 +142,13 @@ a img {
         font-size:16px;
         color:#ee7c36;
     }
-    .preview-image img
+    .preview-image img,
+    .preview-image video
     {
         height: 100%;
         cursor: pointer;
     }
+
     .download-button
     {
         position: absolute;

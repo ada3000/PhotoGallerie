@@ -23,6 +23,8 @@ $(document).ready(function ()
     function closeClick(ev)
     {
         $(Css.dialog).hide();
+        clearDialogContent();
+
         console.debug("closeClick");
     };
 
@@ -30,9 +32,9 @@ $(document).ready(function ()
     {
         console.debug("nextClick");
         var idx = getCurrentImageIndex();
-        
-        if(idx< imageDialog.items.length-1)
-            showImage(imageDialog.items[idx + 1]);
+
+        if (idx < imageDialog.items.length - 1)
+            showImage(imageDialog.items[idx - 1].url, imageDialog.items[idx - 1].downloadUrl);
     };
 
     function prevClick(ev)
@@ -42,7 +44,7 @@ $(document).ready(function ()
         var idx = getCurrentImageIndex();
 
         if (idx > 0)
-            showImage(imageDialog.items[idx - 1]);
+            showImage(imageDialog.items[idx - 1].url, imageDialog.items[idx - 1].downloadUrl);
     };
 
     function findImageItems(ev)
@@ -50,7 +52,7 @@ $(document).ready(function ()
         var items = [];
         $(Css.imageItem).each(function ()
         {
-            items.push($(this).data("image-url"));
+            items.push({ url: $(this).data("image-url"), downloadUrl: $(this).data("download-url") });
         });
 
         return items;
@@ -81,29 +83,24 @@ $(document).ready(function ()
         return false;
     };
 
+    function clearDialogContent()
+    {
+        $(Css.previewImage, Css.dialog).empty();
+    };
+
     function showVideo(url, downloadUrl)
     {
-        /*
-        <video class='video-js vjs-default-skin' controls preload='auto' data-setup='{ "asdf": true }'>
-    <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
-  </video>
-        */
-
         var videoNode = $("<video class='video-js vjs-default-skin' controls preload='auto'/>");
-        //videoNode.data("setup", '{ "asdf": true }');
-
         
+        clearDialogContent();
 
         $(Css.dialog).show();
-        
-        $(Css.previewImage, Css.dialog).empty().append(videoNode);
 
-        //$("<source type='video/mp4'/>").attr("src", url).appendTo(videoNode);
+        $(Css.previewImage, Css.dialog).append(videoNode);
+
         videoNode.attr("src", url);
-        videoNode.autoPlay = true;
-
-        //img.click(nextClick);
-
+        videoNode.attr("autoPlay", true);
+        
         imageDialog.current = url;
         imageDialog.downloadUrl = downloadUrl;
 
@@ -115,7 +112,9 @@ $(document).ready(function ()
         $(Css.dialog).show();
         var img = $("<img src='" + url + "'/>");
 
-        $(Css.previewImage, Css.dialog).empty().append(img);
+        clearDialogContent();
+
+        $(Css.previewImage, Css.dialog).append(img);
 
         img.click(nextClick);
 
@@ -128,7 +127,7 @@ $(document).ready(function ()
     function getCurrentImageIndex()
     {
         for (var i = 0; i < imageDialog.items.length; i++)
-            if (imageDialog.items[i] == imageDialog.current)
+            if (imageDialog.items[i].url == imageDialog.current)
                 return i;
 
         return -1;
@@ -146,7 +145,7 @@ $(document).ready(function ()
 
     $(Css.imageItem).click(imageItemClick);
 
-    $(Css.imageItem).each(function()
+    $(Css.imageItem).each(function ()
     {
         var a = $(this);
         a.data("image-url", this.href);
@@ -157,8 +156,6 @@ $(document).ready(function ()
         {
             items: findImageItems(),
             current: "",
-            downloadUrl:""
+            downloadUrl: ""
         };
-
-
 })
