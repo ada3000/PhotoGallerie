@@ -64,15 +64,50 @@ $(document).ready(function ()
 
     function imageItemClick(ev)
     {
-        var downloadUrl = $(ev.currentTarget).attr("download-url");
-        var imageUrl = $(ev.currentTarget).data("image-url");
+        var node = $(ev.currentTarget);
 
-        console.debug("imageItemClick " + imageUrl);
+        var downloadUrl = node.attr("download-url");
+        var url = node.data("image-url");
+        var isVideo = node.parent().hasClass("js-video");
+
+        console.debug("imageItemClick " + url);
 
 
-        showImage(imageUrl, downloadUrl);
+        if (isVideo)
+            showVideo(url, downloadUrl);
+        else
+            showImage(url, downloadUrl);
 
         return false;
+    };
+
+    function showVideo(url, downloadUrl)
+    {
+        /*
+        <video class='video-js vjs-default-skin' controls preload='auto' data-setup='{ "asdf": true }'>
+    <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
+  </video>
+        */
+
+        var videoNode = $("<video class='video-js vjs-default-skin' controls preload='auto'/>");
+        //videoNode.data("setup", '{ "asdf": true }');
+
+        
+
+        $(Css.dialog).show();
+        
+        $(Css.previewImage, Css.dialog).empty().append(videoNode);
+
+        //$("<source type='video/mp4'/>").attr("src", url).appendTo(videoNode);
+        videoNode.attr("src", url);
+        videoNode.autoPlay = true;
+
+        //img.click(nextClick);
+
+        imageDialog.current = url;
+        imageDialog.downloadUrl = downloadUrl;
+
+        updateImageInfo();
     };
 
     function showImage(url, downloadUrl)

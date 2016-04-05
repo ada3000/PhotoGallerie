@@ -17,6 +17,8 @@ namespace PhotoGalerie
         private string EmptyIcon = @"Images/1.gif";
 
         private string videoPriviewUrl = "Images/video.png";
+        private string videoShowTemplate = "Video.aspx?file={0}&folder={1}";
+        private string videoFullTemplate = "Video.aspx?file={0}&folder={1}&download=true";
 
         //private string Folder = @"D:\Фото\2015\(06) Июнь 10-11";
         protected void Page_Load(object sender, EventArgs e)
@@ -82,18 +84,20 @@ namespace PhotoGalerie
         {
             AddItem(fileName,
                 fileName,
-                 EmptyIcon, videoPriviewUrl, videoPriviewUrl,
+                EmptyIcon,
+                string.Format(videoShowTemplate, fileName, folderParam),
+                string.Format(videoFullTemplate, fileName, folderParam),
                 true,
                 "video js-image js-video");
         }
 
         private void AddImage(string fileName, string folderParam)
         {
-            AddItem("", 
-                fileName, 
-                string.Format(imgPreviewTemplate, fileName, folderParam), 
+            AddItem("",
+                fileName,
+                string.Format(imgPreviewTemplate, fileName, folderParam),
                 string.Format(imgShowTemplate, fileName, folderParam),
-                string.Format(imgFullTemplate, fileName, folderParam), 
+                string.Format(imgFullTemplate, fileName, folderParam),
                 true,
                 "image js-image");
         }
