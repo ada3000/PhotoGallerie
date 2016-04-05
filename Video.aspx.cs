@@ -33,43 +33,50 @@ namespace PhotoGalerie
             if (isDownloadRequest)
                 Response.AppendHeader("Content-Disposition", "attachment; filename=" + file);
 
-            //string rangeHeader = Request.Headers["Range"];
+            string rangeHeader = Request.Headers["Range"];
 
-            //if (!string.IsNullOrEmpty(rangeHeader))
-            //{
-            //    long[] ranges = rangeHeader.Replace("bytes=","")
-            //        .Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries  )
-            //        .Select(s=>long.Parse(s)).ToArray();
-               
-            //    using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-            //    {
-            //        if (ranges.Length > 0) fs.Seek(ranges[0], SeekOrigin.Begin);
+            long seek = 0;
+            long length = 0;
+            bool isRangeMode = !string.IsNullOrEmpty(rangeHeader);
 
-            //        long maxLen = ranges.Length > 1 ? ranges[1]: fs.Length - ranges[0];
-            //        long curLen = 0;
+            if (isRangeMode)
+            {
+                Response.StatusCode = 206; //Partial content;
+                long[] ranges = rangeHeader.Replace("bytes=", "")
+                    .Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => long.Parse(s)).ToArray();
 
-            //        int cnt = 0;
-            //        while (curLen < maxLen && (cnt = fs.Read(buff, 0, buff.Length)) > 0)
-            //        {
-            //            curLen += cnt;
-            //            if (curLen > maxLen) cnt -= (int)(curLen - maxLen);
-
-            //            Response.OutputStream.Write(buff, 0, cnt);
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    FileInfo fi = new FileInfo(filePath);
-            //    Response.AppendHeader("Content-Length", fi.Length.ToString());
-            //}
+                if (ranges.Length > 0) seek = ranges[0];
+                if (ranges.Length > 1) length = ranges[1] - seek + 1;
+            }
 
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
+                fs.Seek(seek, SeekOrigin.Begin);
+
+                long maxLen = length != 0 ? length : fs.Length - seek;
+                long curLen = 0;
+
+                Response.AppendHeader("Content-Length", maxLen.ToString());
+                if (isRangeMode)
+                    Response.AppendHeader("Content-Range", string.Format("bytes {0}-{1}/*", seek, seek + maxLen - 1));
+
                 int cnt = 0;
-                while ((cnt = fs.Read(buff, 0, buff.Length)) > 0)
+                while (curLen < maxLen && (cnt = fs.Read(buff, 0, buff.Length)) > 0)
+                {
+                    curLen += cnt;
+                    if (curLen > maxLen) cnt -= (int)(curLen - maxLen);
+
                     Response.OutputStream.Write(buff, 0, cnt);
+                }
             }
+
+            //using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            //{
+            //    int cnt = 0;
+            //    while ((cnt = fs.Read(buff, 0, buff.Length)) > 0)
+            //        Response.OutputStream.Write(buff, 0, cnt);
+            //}
         }
     }
 }
