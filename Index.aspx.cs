@@ -61,8 +61,7 @@ namespace PhotoGalerie
             foreach (string s in displayImages)
             {
                 string fileName = s.Substring(s.LastIndexOf("\\") + 1);
-                string fileNameL = fileName.ToLower();
-                string fileExt = fileName.Split('.').Last();
+                string fileExt = fileName.Split('.').Last().ToLower();
 
                 if (Config.PhotoExtensions.Contains(fileExt))
                     AddImage(fileName, folderParam);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace PhotoGalerie
             get
             {
                 FileInfo fi = new FileInfo(System.Reflection.Assembly.GetExecutingAssembly().CodeBase.Substring(8).Replace("/", "\\"));
-                
+
                 return Path.Combine(fi.Directory.FullName, System.Configuration.ConfigurationManager.AppSettings["folder"]);
             }
         }
@@ -24,7 +25,7 @@ namespace PhotoGalerie
         {
             get
             {
-                return _photoExtensions ?? (_photoExtensions=System.Configuration.ConfigurationManager.AppSettings["photoExtensions"].Split(','));                
+                return _photoExtensions ?? (_photoExtensions = ExtractArr("photoExtensions"));
             }
         }
 
@@ -33,7 +34,7 @@ namespace PhotoGalerie
         {
             get
             {
-                return _videoExtensions ?? (_videoExtensions = System.Configuration.ConfigurationManager.AppSettings["videoExtensions"].Split(','));
+                return _videoExtensions ?? (_videoExtensions = ExtractArr("videoExtensions"));
             }
         }
 
@@ -42,8 +43,13 @@ namespace PhotoGalerie
         {
             get
             {
-                return _dataExtensions ?? (_dataExtensions = System.Configuration.ConfigurationManager.AppSettings["dataExtensions"].Split(','));
+                return _dataExtensions ?? (_dataExtensions = ExtractArr("dataExtensions"));
             }
+        }
+
+        private static string[] ExtractArr(string appSettingsKey, string separator = ",")
+        {
+            return ConfigurationManager.AppSettings[appSettingsKey].ToLower().Split(new[] { separator }, StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }
