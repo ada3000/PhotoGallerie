@@ -12,13 +12,13 @@ namespace PhotoGalerie
     {
         private string imgPreviewTemplate = "image.aspx?w=160&h=120&file={0}&folder={1}";
         private string imgShowTemplate = "image.aspx?w=1024&h=768&file={0}&folder={1}";
-        private string imgFullTemplate = "image.aspx?w=0&h=0&file={0}&folder={1}";
+        private string imgFullTemplate = "Download.aspx?type=i&file={0}&folder={1}&download=true";
 
         private string EmptyIcon = @"Images/1.gif";
 
         private string videoPriviewUrl = "Images/video.png";
-        private string videoShowTemplate = "Video.aspx?file={0}&folder={1}";
-        private string videoFullTemplate = "Video.aspx?file={0}&folder={1}&download=true";
+        private string videoShowTemplate = "Download.aspx?type=v&file={0}&folder={1}";
+        private string videoFullTemplate = "Download.aspx?type=v&file={0}&folder={1}&download=true";
 
         //private string Folder = @"D:\Фото\2015\(06) Июнь 10-11";
         protected void Page_Load(object sender, EventArgs e)

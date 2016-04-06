@@ -10,6 +10,7 @@
 namespace PhotoGalerie {
     
     
-    public partial class VideoPage {
+    public partial class DownloadPage
+    {
     }
 }

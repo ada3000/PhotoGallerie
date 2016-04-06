@@ -67,7 +67,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Video.aspx" />
+    <Content Include="Download.aspx" />
     <Content Include="Images\1.gif" />
     <Content Include="Images\close.png" />
     <Content Include="Images\folder.png" />
@@ -78,7 +78,6 @@
     <Content Include="Images\video.png" />
     <Content Include="Index.aspx" />
     <Content Include="Image.aspx" />
-    <Content Include="image2.aspx" />
     <Content Include="Js\gellerie.js" />
     <Content Include="Js\jquery-2.1.4.min.js" />
     <Content Include="styles.css" />
@@ -87,12 +86,12 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="FolderHelper.cs" />
-    <Compile Include="Video.aspx.cs">
-      <DependentUpon>Video.aspx</DependentUpon>
+    <Compile Include="Download.aspx.cs">
+      <DependentUpon>Download.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Video.aspx.designer.cs">
-      <DependentUpon>Video.aspx</DependentUpon>
+    <Compile Include="Download.aspx.designer.cs">
+      <DependentUpon>Download.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
