@@ -10,13 +10,13 @@
     <script type="text/javascript" src="Js/gellerie.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-    
+    <div class="content" id="form1" runat="server">
+        
     </div>
-    </form>
 
-    <div class="photo-dialog js-photo-dialog" style="display:none;">
+    <div class="toolbar"></div>
+
+    <div class="photo-dialog js-photo-dialog" style="display: none;">
         <div class="overlay">&nbsp;</div>
         <div class="image-info js-image-info">15/30</div>
         <div class="preview-image js-preview-image">
@@ -26,7 +26,7 @@
         <div class="close-button js-close">&nbsp;</div>
         <div class="prev-button js-prev">&nbsp;</div>
         <div class="next-button js-next">&nbsp;</div>
-        
+
         <div class="download-button js-download">Download</div>
     </div>
 </body>

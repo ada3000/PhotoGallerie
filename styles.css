@@ -4,20 +4,39 @@
     font-size: 1em;
     color: white;
 }
-/*test 3*/
+
 a img {
     border: none;
 }
 
+.toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2em;
+    overflow: hidden;
+    z-index: 1;
+    border: solid 1px gray;
+}
+
+.content {
+    position: absolute;
+    top: 2em;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
 .img {
-    position:relative;
+    position: relative;
     width: 160px;
     height: 120px;
     overflow: hidden;
     margin: 5px;
     border: solid 2px transparent;
     float: left;
-
     background: url(Images/image.png) no-repeat center center;
     background-size: 50px;
 }
@@ -26,12 +45,11 @@ a img {
         display: block;
         text-align: center;
         vertical-align: central;
-
-        position:absolute;
-        top:0;
-        left:0;
-        right:0;
-        bottom:0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
 
     .img:hover {
@@ -39,122 +57,112 @@ a img {
     }
 
 
-    .img.folder
-    {
+    .img.folder {
         background: url(Images/folder.png) no-repeat center top;
         background-size: 85px;
     }
-    .img.video
-    {
+
+    .img.video {
         background: url(Images/video.png) no-repeat center top;
         background-size: 85px;
     }
-    .img .label
-    {
-        display:block;
-        position:absolute;
-        bottom:0;
-        left:0;
-        right:0;
+
+    .img .label {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
         height: 40px;
         color: white;
         overflow: hidden;
-        _text-overflow:ellipsis;
-        _white-space:nowrap;    
-        vertical-align:central;    
+        _text-overflow: ellipsis;
+        _white-space: nowrap;
+        vertical-align: central;
     }
 
-    .photo-dialog .overlay
-    {
-        position:absolute;
-        top:0;
-        left:0;
-        right:0;
-        bottom:0;
-        background-color: black;
-        opacity: 0.8
-    }
+.photo-dialog .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.8;
+}
 
-    .photo-dialog
-    {
-        position:absolute;
-        top:0;
-        left:0;
-        right:0;
-        bottom:0;
-    }
-    .close-button
-    {
-        position:absolute;
-        top:20px;
-        right:20px;
-        width: 32px;
-        height: 32px;
-        cursor:pointer;
-        background:url(Images/close.png) no-repeat top left;
-    }
+.photo-dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
 
-    .prev-button
-    {
-        position:absolute;
-        top:0px;
-        left:20px;
-        bottom:0px;
-        width: 32px;
-        cursor:pointer;
-        background:url(Images/prev.png) no-repeat center left;
-        background-size: 32px;
-    }
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background: url(Images/close.png) no-repeat top left;
+}
 
-    .next-button
-    {
-        position:absolute;
-        top:52px;
-        right:20px;
-        bottom:0px;
-        width: 32px;
-        cursor:pointer;
-        background:url(Images/next.png) no-repeat center left;
-        background-size: 32px;
-    }
+.prev-button {
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    bottom: 0px;
+    width: 32px;
+    cursor: pointer;
+    background: url(Images/prev.png) no-repeat center left;
+    background-size: 32px;
+}
 
-    .preview-image
-    {
-        position:absolute;
-        left: 52px;
-        right: 52px;
-        top:20px;
-        bottom:20px;
-        text-align: center;
+.next-button {
+    position: absolute;
+    top: 52px;
+    right: 20px;
+    bottom: 0px;
+    width: 32px;
+    cursor: pointer;
+    background: url(Images/next.png) no-repeat center left;
+    background-size: 32px;
+}
 
-        overflow: hidden;
+.preview-image {
+    position: absolute;
+    left: 52px;
+    right: 52px;
+    top: 20px;
+    bottom: 20px;
+    text-align: center;
+    overflow: hidden;
+    background: url(Images/loader.gif) no-repeat center center;
+}
 
-        background: url(Images/loader.gif) no-repeat center center;
-    }
+.image-info {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    height: 30px;
+    font-size: 16px;
+    color: #ee7c36;
+}
 
-    .image-info
-    {
-         position:absolute;
-        left: 20px;
-        top:20px;
-        height: 30px;
+.preview-image img,
+.preview-image video {
+    height: 100%;
+    cursor: pointer;
+}
 
-        font-size:16px;
-        color:#ee7c36;
-    }
-    .preview-image img,
-    .preview-image video
-    {
-        height: 100%;
-        cursor: pointer;
-    }
-
-    .download-button
-    {
-        position: absolute;
-        cursor:pointer;
-        top:15px;
-        left:80px;
-        padding: 5px;
-        border: solid 1px white;
-    }
+.download-button {
+    position: absolute;
+    cursor: pointer;
+    top: 15px;
+    left: 80px;
+    padding: 5px;
+    border: solid 1px white;
+}
