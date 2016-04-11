@@ -118,8 +118,8 @@ namespace PhotoGalerie
             pan.Controls.Add(link);
             link.Controls.Add(img);
             link.Controls.Add(lb);
-
             form1.Controls.Add(pan);
+
         }
     }
 }

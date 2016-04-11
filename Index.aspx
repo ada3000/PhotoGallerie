@@ -11,10 +11,17 @@
 </head>
 <body>
     <div class="content" id="form1" runat="server">
-        
+
     </div>
 
-    <div class="toolbar"></div>
+    <div class="toolbar">
+    <ul>
+        <li class="home"><a href="/">&nbsp;</a></li>
+        <li><a href="/">2006</a></li>
+        <li><a href="/">(01) Январь 04 - Тест Др.</a></li>
+        <li class="last"><a href="#">Video</a></li>
+    </ul>
+    </div>
 
     <div class="photo-dialog js-photo-dialog" style="display: none;">
         <div class="overlay">&nbsp;</div>

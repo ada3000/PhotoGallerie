@@ -70,6 +70,12 @@
     <Content Include="Download.aspx" />
     <Content Include="Images\1.gif" />
     <Content Include="Images\close.png" />
+    <Content Include="Images\Design\folder_bg.png" />
+    <Content Include="Images\Design\icon_home.png" />
+    <Content Include="Images\Design\main_bg.png" />
+    <Content Include="Images\Design\toolbar_bg.png" />
+    <Content Include="Images\Design\item_overlay.png" />
+    <Content Include="Images\Design\toolbar_corner.png" />
     <Content Include="Images\folder.png" />
     <Content Include="Images\image.png" />
     <Content Include="Images\loader.gif" />
