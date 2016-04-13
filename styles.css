@@ -5,6 +5,13 @@
     background: #e8e1db url(Images/Design/main_bg.png) repeat top left;
 }
 
+@media screen and (-webkit-device-pixel-ratio:1.5),(device-pixel-ratio:1.5) { body {font-size: 1.5em;} }
+@media screen and (-webkit-device-pixel-ratio:2),(device-pixel-ratio:2) { body {font-size: 2em;} }
+@media screen and (-webkit-device-pixel-ratio:2.5),(device-pixel-ratio:2.5) { body {font-size: 2.5em;} }
+@media screen and (-webkit-device-pixel-ratio:3),(device-pixel-ratio:3) { body {font-size: 3em;} }
+@media screen and (-webkit-device-pixel-ratio:3.5),(device-pixel-ratio:3.5) { body {font-size: 3.5em;} }
+@media screen and (-webkit-device-pixel-ratio:4),(device-pixel-ratio:4) { body {font-size: 4em;} }
+
 a img {
     border: none;
 }
@@ -43,6 +50,7 @@ a img {
 {
     width: 1.5em;
     background: url(Images/Design/icon_home.png) no-repeat 0.1em 0.3em;
+    background-size: 1.31em;
 }
 .toolbar .last
 {
@@ -75,13 +83,13 @@ a img {
 
 .img {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 8em;
+    height: 8em;
     overflow: hidden;
-    margin: 10px 0 0 10px;
+    margin: 0.7em 0 0 0.7em;
     float: left;
     background: url(Images/image.png) no-repeat center center;
-    background-size: 50px;
+    background-size: 3em;
     box-shadow: 0 0.1em 0.5em black;
 }
 
@@ -95,7 +103,10 @@ a img {
         right: 0;
         bottom: 0;
     }
-
+    .img a img {
+        width: 100%;
+        height: 100%;
+    }
     .img:hover {
         box-shadow: 0 0.1em 1em #a04614;
     }
@@ -103,16 +114,18 @@ a img {
 
     .img.folder {
         background: url(Images/Design/folder_bg.png) no-repeat left top;
+        background-size: 100%;
     }
 
     .img.folder a
     {
         background: url(Images/Design/item_overlay.png) no-repeat left top;
+        background-size: 100%;
     }
 
     .img.video {
         background: url(Images/video.png) no-repeat center top;
-        background-size: 85px;
+        background-size: 5.5em;
     }
 
     .img .label {
@@ -121,7 +134,7 @@ a img {
         bottom: 0;
         left: 0;
         right: 0;
-        height: 40px;
+        height: 2.5em;
         color: white;
         overflow: hidden;
         _text-overflow: ellipsis;
