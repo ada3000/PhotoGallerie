@@ -6,22 +6,15 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace PhotoGalerie
 {
-    public partial class ImagePage : System.Web.UI.Page
+    public partial class ImagePage : Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        private const long ImgDefaultQuality = 60;
+
+        private string GetFilePath()
         {
-            Response.ContentType = "image/jpeg";
-            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(24));
-            var imgQuality = 60L;
-            byte[] buff = new byte[0x2000];
-
-            int width = int.Parse(Request.QueryString.Get("w"));
-            int height = int.Parse(Request.QueryString.Get("h"));
-
             string file = Request.QueryString.Get("file");
             string folderParam = Request.QueryString.Get("folder");
 
@@ -30,71 +23,112 @@ namespace PhotoGalerie
             string pageFolder = FolderHelper.GetFolderPath(Config.BaseFolder, folderParam);
             string filePath = pageFolder + "\\" + file;
 
-            if (width == 0 && height == 0)
-            {
-                //Show save as dialog
-                Response.AppendHeader("Content-Disposition", "attachment; filename=" + file);
+            return filePath;
+        }
 
-                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            int width = int.Parse(Request.QueryString.Get("w"));
+            int height = int.Parse(Request.QueryString.Get("h"));
+
+            string resizeMode = Request.QueryString.Get("mode") ?? "crop"; //fill | crop
+
+            using (Image img = Image.FromFile(GetFilePath()))
+            {
+                Bitmap newImage = null;
+                if (resizeMode == "fill")
+                    newImage = ResizeFill(img, width, height);
+                else
+                    newImage = ResizeCrop(img, width, height);
+
+                using (newImage)
                 {
-                    int cnt = 0;
-                    while ((cnt = fs.Read(buff, 0, buff.Length)) > 0)
-                        Response.OutputStream.Write(buff, 0, cnt);
+                    byte[] imgData = SaveToJpeg(newImage, ImgDefaultQuality);
+
+                    Response.ContentType = "image/jpeg";
+                    Response.Cache.SetExpires(DateTime.UtcNow.AddHours(24));
+                    Response.OutputStream.Write(imgData, 0, imgData.Length);
                 }
+            }
+        }
+
+        private Bitmap ResizeCrop(Image img, int width, int height)
+        {
+            double aspect = 1.0 * img.Width / img.Height;
+
+            int tmpW = width;
+            int tmpH = height;
+
+            int drawX = 0;
+            int drawY = 0;
+
+            if (aspect > 1)
+            {
+                tmpW = (int)(aspect * tmpH);
+                drawX = (width - tmpW) / 2;
             }
             else
             {
-                using (System.Drawing.Image img = System.Drawing.Image.FromFile(filePath))
+                tmpH = (int)(tmpW / aspect);
+                drawY = (height - tmpH) / 2;
+            }
+
+            Bitmap result = new Bitmap(width, height);
+
+            using (Bitmap tmpImage = new Bitmap(img, tmpW, tmpH))                
+                using (Graphics gr = Graphics.FromImage(result))
+                    gr.DrawImage(tmpImage, drawX, drawY);
+
+            return result;
+        }
+
+        private Bitmap ResizeFill(Image img, int width, int height)
+        {
+            double aspect = 1.0 * img.Width / img.Height;
+
+            int newHeight = (int)(width / aspect);
+            int newWidth = (int)(height * aspect);
+
+            if (newHeight > height)
+                width = newWidth;
+            else
+                height = newHeight;
+
+            var imgSize = new Size(width, height);
+
+            return new Bitmap(img, imgSize);
+        }
+
+        private byte[] SaveToJpeg(Bitmap image, long quality)
+        {
+            using (MemoryStream ms = new MemoryStream(image.Width * image.Height * 4 + 1000))
+            {
+                ImageCodecInfo jgpEncoder = null;
+
+                ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+
+                foreach (ImageCodecInfo codec in codecs)
                 {
-                    double aspect = 1.0 * img.Width / img.Height;
-
-                    int newHeight = (int)(width / aspect);
-                    int newWidth = (int)(height * aspect);
-
-                    if (newHeight > height)
-                        width = newWidth;
-                    else
-                        height = newHeight;
-
-                    var imgSize = new Size(width, height);
-
-                    using (Bitmap resizeImg = new Bitmap(img, imgSize))
+                    if (codec.FormatID == ImageFormat.Jpeg.Guid)
                     {
-                        using (MemoryStream ms = new MemoryStream(resizeImg.Width * resizeImg.Height * 4 + 1000))
-                        {
-                            #region SaveImage
-
-                            ImageCodecInfo jgpEncoder = null;
-
-                            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
-
-                            foreach (ImageCodecInfo codec in codecs)
-                            {
-                                if (codec.FormatID == ImageFormat.Jpeg.Guid)
-                                {
-                                    jgpEncoder = codec;
-                                    break;
-                                }
-                            }
-
-                            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
-                            EncoderParameters myEncoderParameters = new EncoderParameters(1);
-
-                            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, imgQuality);
-                            myEncoderParameters.Param[0] = myEncoderParameter;
-
-                            resizeImg.Save(ms, jgpEncoder, myEncoderParameters);
-
-                            ms.Position = 0;
-                            byte[] imgBuffer = new byte[ms.Length];
-                            ms.Read(imgBuffer, 0, imgBuffer.Length);
-
-                            #endregion
-
-                            Response.OutputStream.Write(imgBuffer, 0, imgBuffer.Length);
-                        }
+                        jgpEncoder = codec;
+                        break;
                     }
                 }
+
+                Encoder myEncoder = Encoder.Quality;
+                EncoderParameters myEncoderParameters = new EncoderParameters(1);
+
+                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, quality);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+
+                image.Save(ms, jgpEncoder, myEncoderParameters);
+
+                ms.Position = 0;
+                byte[] imgBuffer = new byte[ms.Length];
+                ms.Read(imgBuffer, 0, imgBuffer.Length);
+
+                return imgBuffer;
             }
         }
     }
