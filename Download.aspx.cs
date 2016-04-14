@@ -41,7 +41,7 @@ namespace PhotoGalerie
 
             if (file.IndexOf("..") > -1) throw new InvalidDataException();
 
-            string pageFolder = FolderHelper.GetFolderPath(Config.BaseFolder, folderParam);
+            string pageFolder = FolderHelper.GetFolderPath(Config.BaseFolder, folderParam).Path;
             string filePath = pageFolder + "\\" + file;
 
             return filePath;

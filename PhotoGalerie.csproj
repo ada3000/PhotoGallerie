@@ -70,6 +70,7 @@
     <Content Include="Download.aspx" />
     <Content Include="Images\1.gif" />
     <Content Include="Images\close.png" />
+    <Content Include="Images\Design\folder_back.png" />
     <Content Include="Images\Design\folder_bg.png" />
     <Content Include="Images\Design\icon_home.png" />
     <Content Include="Images\Design\main_bg.png" />
@@ -84,6 +85,7 @@
     <Content Include="Images\video.png" />
     <Content Include="Index.aspx" />
     <Content Include="Image.aspx" />
+    <Content Include="Js\toolbar.js" />
     <Content Include="Js\gellerie.js" />
     <Content Include="Js\jquery-2.1.4.min.js" />
     <Content Include="styles.css" />
@@ -99,6 +101,7 @@
     <Compile Include="Download.aspx.designer.cs">
       <DependentUpon>Download.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FolderInfo.cs" />
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

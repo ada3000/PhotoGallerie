@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -10,6 +11,7 @@ namespace PhotoGalerie
 {
     public partial class IndexPage : System.Web.UI.Page
     {
+        private const string ParentFolderName = "";
         private string imgPreviewTemplate = "image.aspx?w=128&h=128&file={0}&folder={1}&mode=crop";
         private string imgShowTemplate = "image.aspx?w=1024&h=768&file={0}&folder={1}&mode=fill";
         private string imgFullTemplate = "Download.aspx?type=i&file={0}&folder={1}&download=true";
@@ -20,6 +22,7 @@ namespace PhotoGalerie
         private string videoShowTemplate = "Download.aspx?type=v&file={0}&folder={1}";
         private string videoFullTemplate = "Download.aspx?type=v&file={0}&folder={1}&download=true";
 
+        public string ToolBarData = "[]";
         //private string Folder = @"D:\Фото\2015\(06) Июнь 10-11";
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,12 +34,17 @@ namespace PhotoGalerie
             //Response.Write(pageFolder);
             string folderParam = Request.QueryString.Get("folder") ?? "";
 
+            Title = "";
+
             if (folderParam != "")
             {
-                pageFolder = FolderHelper.GetFolderPath(Config.BaseFolder, folderParam);
-                var folderParams = folderParam.Split(',');
+                var folderInfo = FolderHelper.GetFolderPath(Config.BaseFolder, folderParam);
+                pageFolder = folderInfo.Path;
+                AddFolder(ParentFolderName, folderInfo.Folders.Count > 1 ? folderInfo.Folders[folderInfo.Folders.Count - 2].Id : "");
 
-                AddFolder("..", string.Join(",", folderParams.Take(folderParams.Length - 1)));
+                Title = folderInfo.Folders.Last().Title + " - ";
+                JavaScriptSerializer ser = new JavaScriptSerializer();
+                ToolBarData = ser.Serialize(folderInfo.Folders);
             }
 
             string[] displayFoldersRaw = Directory.GetDirectories(pageFolder);
@@ -103,7 +111,10 @@ namespace PhotoGalerie
 
         private void AddFolder(string name, string id)
         {
-            AddItem(name, name, EmptyIcon, "?folder=" + id, "", false, "folder");
+            string navUrl = string.IsNullOrEmpty(id) ? "/" : "?folder=" + id;
+            string cssClass = name == ParentFolderName ? "folder-back" : "folder";
+
+            AddItem(name, name, EmptyIcon, navUrl, "", false, cssClass);
         }
 
         private void AddItem(string name, string title, string previewImageUrl, string navigateUrl, string downloadUrl, bool newWindow, string cssClass = "")

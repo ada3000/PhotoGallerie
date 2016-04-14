@@ -9,24 +9,39 @@ namespace PhotoGalerie
 {
     static class FolderHelper
     {
-        public static string GetFolderPath(string baseFolder, string folderParam)
+        public static FolderInfo GetFolderPath(string baseFolder, string folderParam)
         {
+            FolderInfo result = new FolderInfo();
+
             var pageFolder = baseFolder;
             //Response.Write(pageFolder);
             if (folderParam != "")
             {
                 string[] folderParams = folderParam.Split(',');
-                foreach (var fp in folderParams)
-                {
-                    string[] dfr = Directory.GetDirectories(pageFolder);
-                    List<string> df = new List<string>(dfr);
-                    df.Sort();
+                string currentFolderId = "";
+                string folderName = "";
 
-                    pageFolder = df[int.Parse(fp)];
+                foreach (var folderIndex in folderParams)
+                {
+                    currentFolderId += currentFolderId == "" ? folderIndex : "," + folderIndex;
+
+                    List<string> folders = Directory.GetDirectories(pageFolder).ToList();
+                    folders.Sort();
+
+                    pageFolder = folders[int.Parse(folderIndex)];
+                    folderName = pageFolder.Substring(pageFolder.LastIndexOf("\\")+1);
+
+                    result.Folders.Add(new FolderInfo.Item
+                    {
+                        Title = folderName,
+                        Id = currentFolderId
+                    });
                 }
             }
 
-            return pageFolder;
+            result.Path = pageFolder;
+
+            return result;
         }
     }
 }

@@ -60,5 +60,14 @@ namespace PhotoGalerie
                 return _version ?? (_version = typeof(Config).Assembly.GetName().Version.ToString());
             }
         }
+
+        private static string _title;
+        public static string Title
+        {
+            get
+            {
+                return _title ?? (_title = ConfigurationManager.AppSettings["title"]);
+            }
+        }
     }
 }
