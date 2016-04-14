@@ -7,7 +7,7 @@
     <title>ADA Photo galerie</title>    
     <link type="text/css" rel="stylesheet" <%= "href=\"styles.css?v="+PhotoGalerie.Config.Version+"\"" %> />
     <script type="text/javascript" src="Js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" <%= "src=\"Js/gellerie.jsv="+PhotoGalerie.Config.Version+"\"" %> ></script>
+    <script type="text/javascript" <%= "src=\"Js/gellerie.js?v="+PhotoGalerie.Config.Version+"\"" %> ></script>
 </head>
 <body>
     <div class="content" id="form1" runat="server">
