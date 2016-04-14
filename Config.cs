@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PhotoGalerie
 {
-    static class Config
+    public static class Config
     {
         public static string BaseFolder
         {
@@ -50,6 +50,15 @@ namespace PhotoGalerie
         private static string[] ExtractArr(string appSettingsKey, string separator = ",")
         {
             return ConfigurationManager.AppSettings[appSettingsKey].ToLower().Split(new[] { separator }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        private static string _version = null;
+        public static string Version
+        {
+            get
+            {
+                return _version ?? (_version = typeof(Config).Assembly.GetName().Version.ToString());
+            }
         }
     }
 }
