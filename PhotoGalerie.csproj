@@ -81,7 +81,9 @@
     <Content Include="Images\Design\toolbar_corner.png" />
     <Content Include="Images\folder.png" />
     <Content Include="Images\image.png" />
+    <Content Include="Images\left.svg" />
     <Content Include="Images\loader.gif" />
+    <Content Include="Images\right.svg" />
     <Content Include="Images\video.png" />
     <Content Include="Index.aspx" />
     <Content Include="Image.aspx" />
