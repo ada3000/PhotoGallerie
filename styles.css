@@ -5,12 +5,14 @@
     background: #e8e1db url(Images/Design/main_bg.png) repeat top left;
 }
 
-@media screen and (-webkit-device-pixel-ratio:1.5),(device-pixel-ratio:1.5) { body {font-size: 1.5em;} }
-@media screen and (-webkit-device-pixel-ratio:2),(device-pixel-ratio:2) { body {font-size: 2em;} }
-@media screen and (-webkit-device-pixel-ratio:2.5),(device-pixel-ratio:2.5) { body {font-size: 2.5em;} }
-@media screen and (-webkit-device-pixel-ratio:3),(device-pixel-ratio:3) { body {font-size: 3em;} }
-@media screen and (-webkit-device-pixel-ratio:3.5),(device-pixel-ratio:3.5) { body {font-size: 3.5em;} }
-@media screen and (-webkit-device-pixel-ratio:4),(device-pixel-ratio:4) { body {font-size: 4em;} }
+@media screen and (x-webkit-device-pixel-ratio:1.5),(xdevice-pixel-ratio:1.5),(min-resolution: 150dpi) { html {font-size: 1.5em;} }
+@media screen and (x-webkit-device-pixel-ratio:2),(xdevice-pixel-ratio:2),(min-resolution: 192dpi) { html {font-size: 2em;} }
+@media screen and (x-webkit-device-pixel-ratio:2.5),(xdevice-pixel-ratio:2.5), (min-resolution: 320dpi) { html {font-size: 2.5em;} }
+@media screen and (x-webkit-device-pixel-ratio:3),(xdevice-pixel-ratio:3),(min-resolution: 440dpi) { html {font-size: 3em;} }
+@media screen and (-webkit-device-pixel-ratio:3.5),(device-pixel-ratio:3.5),(min-resolution: 550dpi) { html {font-size: 3.5em;} }
+@media screen and (-webkit-device-pixel-ratio:4),(device-pixel-ratio:4),(min-resolution: 670dpi) { html {font-size: 4em;} }
+
+@media screen and (orientation: portrait) { body {font-size: 150%;} }
 
 a img {
     border: none;
