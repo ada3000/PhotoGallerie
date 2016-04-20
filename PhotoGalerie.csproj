@@ -67,6 +67,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Css\folder.css" />
+    <Content Include="Css\galerie.css" />
+    <Content Include="Css\toolbar.css" />
     <Content Include="Download.aspx" />
     <Content Include="Images\1.gif" />
     <Content Include="Images\close.png" />
@@ -88,7 +91,7 @@
     <Content Include="Js\toolbar.js" />
     <Content Include="Js\gellerie.js" />
     <Content Include="Js\jquery-2.1.4.min.js" />
-    <Content Include="styles.css" />
+    <Content Include="Css\common.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

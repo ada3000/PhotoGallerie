@@ -34,7 +34,7 @@ $(document).ready(function ()
         var idx = getCurrentImageIndex();
 
         if (idx < imageDialog.items.length - 1)
-            showImage(imageDialog.items[idx - 1].url, imageDialog.items[idx - 1].downloadUrl);
+            showImage(imageDialog.items[idx + 1].url, imageDialog.items[idx + 1].downloadUrl);
     };
 
     function prevClick(ev)
