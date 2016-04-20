@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title><%= Title + PhotoGalerie.Config.Title %></title>
-    
+
     <link type="text/css" rel="stylesheet" href=<%= "\"Css/common.css?v="+PhotoGalerie.Config.Version+"\"" %> />
     <link type="text/css" rel="stylesheet" href=<%= "\"Css/toolbar.css?v="+PhotoGalerie.Config.Version+"\"" %> />
     <link type="text/css" rel="stylesheet" href=<%= "\"Css/folder.css?v="+PhotoGalerie.Config.Version+"\"" %> />
@@ -47,11 +47,16 @@
             &nbsp;
         </div>
 
-        <div class="close-button js-close">&nbsp;</div>
-        <div class="prev-button js-prev">&nbsp;</div>
-        <div class="next-button js-next">&nbsp;</div>
+        <div class="closer js-close"><span class="icon icon_pseudo icon_cross-small">
+            <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" width="100%" height="100%" viewBox="0 0 14 14">
+                <path fill="currentColor" d="M14.5,0.2l-0.7-0.7L7.5,5.799L1.2-0.5L0.5,0.2l6.3,6.3 l-6.3,6.299L1.2,13.5l6.3-6.3l6.3,6.3l0.7-0.701L8.2,6.5L14.5,0.2z"></path>
+            </svg></span>
+        </div>
 
-        <div class="download-button js-download">Download</div>
+        <div class="prev-button js-prev"><span>&nbsp;</span></div>
+        <div class="next-button js-next"><span>&nbsp;</span></div>
+
+        <div class="download-button button js-download">Download</div>
     </div>
 </body>
 </html>
