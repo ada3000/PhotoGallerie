@@ -1,0 +1,66 @@
+﻿.img {
+    position: relative;
+    width: 8em;
+    height: 8em;
+    overflow: hidden;
+    margin: 0.7em 0 0 0.7em;
+    float: left;
+    background: url(../Images/image.png) no-repeat center center;
+    background-size: 3em;
+    box-shadow: 0 0.1em 0.5em black;
+}
+
+    .img a {
+        display: block;
+        text-align: center;
+        vertical-align: central;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .img a img {
+        width: 100%;
+        height: 100%;
+    }
+    .img:hover {
+        box-shadow: 0 0.1em 1em #a04614;
+    }
+
+
+    .img.folder {
+        background: url(../Images/Design/folder_bg.png) no-repeat left top;
+        background-size: 100%;
+    }
+
+    .img.folder-back {
+        background: url(../Images/Design/folder_back.png) no-repeat left top;
+        background-size: 100%;
+    }
+
+    .img.folder a,
+    .img.video a
+    {
+        background: url(../Images/Design/item_overlay.png) no-repeat left top;
+        background-size: 100%;
+    }
+
+    .img.video {
+        background: url(../Images/video.png) no-repeat center top;
+        background-size: 5.5em;
+    }
+
+    .img .label {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2.5em;
+        color: white;
+        overflow: hidden;
+        _text-overflow: ellipsis;
+        _white-space: nowrap;
+        vertical-align: central;
+    }
