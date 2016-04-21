@@ -89,7 +89,8 @@ namespace PhotoGalerie
 
         private void AddVideo(string fileName, string folderParam)
         {
-            AddItem(fileName,
+            AddItem(
+                NormalizeFileName(fileName),
                 fileName,
                 EmptyIcon,
                 string.Format(videoShowTemplate, fileName, folderParam),
@@ -101,7 +102,7 @@ namespace PhotoGalerie
         private void AddImage(string fileName, string folderParam)
         {
             AddItem("",
-                fileName,
+                NormalizeFileName(fileName),
                 string.Format(imgPreviewTemplate, fileName, folderParam),
                 string.Format(imgShowTemplate, fileName, folderParam),
                 string.Format(imgFullTemplate, fileName, folderParam),
@@ -114,7 +115,7 @@ namespace PhotoGalerie
             string navUrl = string.IsNullOrEmpty(id) ? "/" : "?folder=" + id;
             string cssClass = name == ParentFolderName ? "folder-back" : "folder";
 
-            AddItem(name, name, EmptyIcon, navUrl, "", false, cssClass);
+            AddItem(NormalizeFolderName(name), name, EmptyIcon, navUrl, "", false, cssClass);
         }
 
         private void AddItem(string name, string title, string previewImageUrl, string navigateUrl, string downloadUrl, bool newWindow, string cssClass = "")
@@ -131,6 +132,17 @@ namespace PhotoGalerie
             link.Controls.Add(lb);
             form1.Controls.Add(pan);
 
+        }
+
+        private static string NormalizeFolderName(string folder)
+        {
+            return folder.Length > 5 && folder[0] == '(' && folder[3] == ')' ? folder.Substring(5) : folder;
+        }
+
+        private static string NormalizeFileName(string file)
+        {
+            int idx = file.LastIndexOf('.');
+            return idx>-1 ? file.Substring(0, idx) : file;
         }
     }
 }
