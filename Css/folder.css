@@ -61,7 +61,6 @@
         height: 2.5em;
         color: white;
         overflow: hidden;
-        _text-overflow: ellipsis;
-        _white-space: nowrap;
         vertical-align: central;
+        margin: 0.1em;
     }
