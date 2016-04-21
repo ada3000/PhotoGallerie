@@ -7,7 +7,7 @@
     float: left;
     background: url(../Images/image.png) no-repeat center center;
     background-size: 3em;
-    box-shadow: 0 0.1em 0.5em black;
+    box-shadow: 0 0.1em 0.5em black;    
 }
 
     .img a {
@@ -18,7 +18,7 @@
         top: 0;
         left: 0;
         right: 0;
-        bottom: 0;
+        bottom: 0;        
         font-size: 0.8em;
     }
     .img a img {
@@ -58,9 +58,22 @@
         bottom: 0;
         left: 0;
         right: 0;
-        height: 2.5em;
+        height: 40%;
         color: white;
         overflow: hidden;
         vertical-align: central;
         margin: 0.1em;
     }
+
+@media screen and (-webkit-device-pixel-ratio:1.5),(device-pixel-ratio:1.5),(max-resolution: 150dpi) and (max-width: 1920px) 
+{ 
+    .img 
+    {
+        width: 8em; 
+        height:8em;
+    } 
+    .img a
+    {
+        font-size: 1em;
+    } 
+}
