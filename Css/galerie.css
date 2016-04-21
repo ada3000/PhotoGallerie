@@ -6,21 +6,8 @@
         display:none !important;
     }
 
-    .preview-image {
-        line-height: 33em;
-    }
-    .preview-image img,
-    .preview-image video {
-        width:100%;
-    }
 }
-@media screen and (orientation: landscape) 
-{ 
-    .preview-image img,
-    .preview-image video {
-        height:100%;
-    }
-}
+
 .photo-dialog .overlay {
     position: fixed;
     top: 0;
@@ -121,6 +108,9 @@
 .preview-image video {
     cursor: pointer;
     vertical-align:middle;
+    height:100%;
+    width:100%;
+    object-fit:contain;
 }
 
 .download-button {
