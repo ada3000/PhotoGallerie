@@ -10,9 +10,11 @@
     <link type="text/css" rel="stylesheet" href=<%= "\"Css/toolbar.css?v="+PhotoGalerie.Config.Version+"\"" %> />
     <link type="text/css" rel="stylesheet" href=<%= "\"Css/folder.css?v="+PhotoGalerie.Config.Version+"\"" %> />
     <link type="text/css" rel="stylesheet" href=<%= "\"Css/galerie.css?v="+PhotoGalerie.Config.Version+"\"" %> />
-
+        
     <script type="text/javascript" src="Js/jquery-2.1.4.min.js"></script>
-
+    <script type="text/javascript" src="Js/jquery.event.move.js"></script>
+    <script type="text/javascript" src="Js/jquery.event.swipe.js"></script>
+    
     <script type="text/javascript" <%= "src=\"Js/gellerie.js?v="+PhotoGalerie.Config.Version+"\"" %>></script>
     <script type="text/javascript">
         var toolbarPathData = <%= ToolBarData%>;

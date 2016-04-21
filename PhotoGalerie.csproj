@@ -87,6 +87,8 @@
     <Content Include="Images\video.png" />
     <Content Include="Index.aspx" />
     <Content Include="Image.aspx" />
+    <Content Include="Js\jquery.event.move.js" />
+    <Content Include="Js\jquery.event.swipe.js" />
     <Content Include="Js\toolbar.js" />
     <Content Include="Js\gellerie.js" />
     <Content Include="Js\jquery-2.1.4.min.js" />

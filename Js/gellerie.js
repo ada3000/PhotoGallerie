@@ -138,12 +138,15 @@ $(document).ready(function ()
         $(Css.imageInfo).html((getCurrentImageIndex() + 1) + "/" + imageDialog.items.length);
     };
 
-    $(Css.nextButton, Css.dialog).click(nextClick);
-    $(Css.prevButton, Css.dialog).click(prevClick);
     $(Css.downloadButton, Css.dialog).click(downloadClick);
     $(Css.closeButton, Css.dialog).click(closeClick);
 
+    $(Css.nextButton, Css.dialog).click(nextClick);
+    $(Css.prevButton, Css.dialog).click(prevClick);
     $(Css.imageItem).click(imageItemClick);
+
+    $(Css.dialog).on("swipeleft", nextClick);
+    $(Css.dialog).on("swiperight", prevClick);
 
     $(Css.imageItem).each(function ()
     {
