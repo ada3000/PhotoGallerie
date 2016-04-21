@@ -19,22 +19,18 @@ a img {
 }
 
 .content {
-    position: absolute;
-    top: 2em;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: auto;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    float:left;
 }
 
 .version
 {
-    position:absolute;
-    bottom:0;
-    right:1.5em;
+    text-align: right;
     padding: 0.2em 0.3em;
     zoom:1;
     font-size: 0.8em;
     border-radius:4px;
     background-color: rgba(203,193,189,.8);
+    clear: both;
 }
