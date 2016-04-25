@@ -21,6 +21,7 @@
         right: 0;
         bottom: 0;        
         font-size: 0.8em;
+        transition: font ease 0.3s;
     }
     .img a img {
         width: 100%;
