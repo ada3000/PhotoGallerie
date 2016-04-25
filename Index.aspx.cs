@@ -12,7 +12,7 @@ namespace PhotoGalerie
     public partial class IndexPage : System.Web.UI.Page
     {
         private const string ParentFolderName = "";
-        private string imgPreviewTemplate = "image.aspx?w=128&h=128&file={0}&folder={1}&mode=crop";
+        private string imgPreviewTemplate = "image.aspx?w=217&h=217&file={0}&folder={1}&mode=crop";
         private string imgShowTemplate = "image.aspx?w=1024&h=768&file={0}&folder={1}&mode=fill";
         private string imgFullTemplate = "Download.aspx?type=i&file={0}&folder={1}&download=true";
 

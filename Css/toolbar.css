@@ -42,6 +42,7 @@
 }
 .toolbar ul
 {
+    width: 300%;
     list-style-type:none;
 }
 .toolbar ul li
