@@ -185,5 +185,5 @@
     left:0;
     height:3em;
     background: url(../Images/Design/header_bg.png) repeat-x top left;
-    _background-size: 3em;
+    background-size: 1px 3em;
 }
