@@ -89,19 +89,11 @@
     position: absolute;
     left: 1em;
     right: 1em;
-    top: 1em;
-    bottom: 1em;
+    top: 0;
+    bottom: 0;
     text-align: center;
     overflow: hidden;
     background: url(../Images/loader.gif) no-repeat center center;    
-}
-
-.image-info {
-    position: absolute;
-    left: 20px;
-    top: 20px;
-    height: 30px;
-    color: #B7B7B7;
 }
 
 .preview-image img,
@@ -113,14 +105,40 @@
     object-fit:contain;
 }
 
-.download-button {
-    position: absolute;
-    cursor: pointer;
-    top: 15px;
-    left: 80px;
-    padding: 5px;
-    border: solid 1px #B7B7B7;
+.galerie-button
+{
+    opacity: 0.5;
+    transition: opacity ease 0.5s;
+    overflow: hidden;
+    padding: 1em;
+    line-height:1em;
+    color: white;
+    height: 3em;    
+    box-sizing:border-box;
 }
+
+.galerie-button:hover {
+        opacity:1;
+    }
+
+.image-info {
+    
+    margin-left: 3em;
+}
+
+.download-button {
+    cursor: pointer;
+    width: 3em;    
+    background: url(../Images/download.svg) no-repeat 1em 1em;
+    background-size: 1em;
+    
+    position:absolute;
+    left:0;
+    right:0;
+    z-index:1;    
+}
+
+    
 
 
 .closer {
@@ -157,4 +175,15 @@
 
 .svg-icon {
     vertical-align: middle;
+}
+
+.image-header
+{
+    position:absolute;
+    top:0;
+    right:0;
+    left:0;
+    height:3em;
+    background: url(../Images/Design/header_bg.png) repeat-x top left;
+    _background-size: 3em;
 }

@@ -44,10 +44,16 @@
 
     <div class="photo-dialog js-photo-dialog" style="display: none;">
         <div class="overlay">&nbsp;</div>
-        <div class="image-info js-image-info">15/30</div>
+        
         <div class="preview-image js-preview-image">
             &nbsp;
         </div>
+
+        <div class="image-header">
+            <div class="galerie-button download-button button js-download">&nbsp;</div>
+            <div class="galerie-button image-info js-image-info">15/30</div>            
+        </div>
+        
 
         <div class="closer js-close"><span class="icon icon_pseudo icon_cross-small">
             <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" width="100%" height="100%" viewBox="0 0 14 14">
@@ -57,8 +63,6 @@
 
         <div class="prev-button js-prev"><span>&nbsp;</span></div>
         <div class="next-button js-next"><span>&nbsp;</span></div>
-
-        <div class="download-button button js-download">Download</div>
     </div>
 </body>
 </html>

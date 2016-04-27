@@ -74,11 +74,13 @@
     <Content Include="Images\1.gif" />
     <Content Include="Images\Design\folder_back.png" />
     <Content Include="Images\Design\folder_bg.png" />
+    <Content Include="Images\Design\header_bg.png" />
     <Content Include="Images\Design\icon_home.png" />
     <Content Include="Images\Design\main_bg.png" />
     <Content Include="Images\Design\toolbar_bg.png" />
     <Content Include="Images\Design\item_overlay.png" />
     <Content Include="Images\Design\toolbar_corner.png" />
+    <Content Include="Images\download.svg" />
     <Content Include="Images\folder.png" />
     <Content Include="Images\image.png" />
     <Content Include="Images\left.svg" />
