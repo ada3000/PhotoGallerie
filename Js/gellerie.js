@@ -52,7 +52,7 @@ $(document).ready(function ()
         var items = [];
         $(Css.imageItem).each(function ()
         {
-            items.push({ url: $(this).data("image-url"), downloadUrl: $(this).data("download-url") });
+            items.push({ url: $(this).data("image-url"), downloadUrl: $(this).attr("download-url") });
         });
 
         return items;
