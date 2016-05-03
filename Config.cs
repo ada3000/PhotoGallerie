@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -10,6 +11,14 @@ namespace PhotoGalerie
 {
     public static class Config
     {
+        private static ILog Logger;
+
+        static Config()
+        {
+            Logger = LogManager.GetLogger("1");
+            Logger.Debug("22");
+        }
+
         public static string BaseFolder
         {
             get

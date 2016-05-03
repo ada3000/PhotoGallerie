@@ -7,12 +7,17 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using log4net;
+using System.Text;
 
 namespace PhotoGalerie
 {
     public partial class DownloadPage : System.Web.UI.Page
     {
+        private ILog Logger = LogManager.GetLogger("PhotoGalerie.DownloadPage");
+
         private const int PartialContentHttpStatus = 206;
+
         /// <summary>
         /// Set header: 
         /// </summary>
@@ -68,12 +73,22 @@ namespace PhotoGalerie
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            LogRequest();
 
             ProcessContentType();
             ProcessCacheMode();
             ProcessDownloadMode();
 
             SendFile();            
+        }
+
+        private void LogRequest()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Url: " + Request.Url);
+            sb.Append(", Range: " + Request.Headers["Range"]);
+
+            Logger.Debug(sb);
         }
 
         private void SendFile()
