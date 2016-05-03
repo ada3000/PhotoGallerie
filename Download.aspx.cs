@@ -142,7 +142,8 @@ namespace PhotoGalerie
             long maxLen = length != 0 ? length : actualLength - startPosition;
 
             Response.StatusCode = PartialContentHttpStatus; //Partial content;
-            Response.AppendHeader("Content-Range", string.Format("bytes {0}-{1}/*", startPosition, startPosition + maxLen - 1));
+            //Response.AppendHeader("Content-Range", string.Format("bytes {0}-{1}/*", startPosition, startPosition + maxLen - 1));
+            Response.AppendHeader("Content-Range", string.Format("bytes {0}-{1}/{2}", startPosition, startPosition + maxLen - 1, actualLength));
             Response.AppendHeader("Content-Length", maxLen.ToString());
 
             return maxLen;
