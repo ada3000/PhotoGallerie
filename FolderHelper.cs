@@ -43,5 +43,37 @@ namespace PhotoGalerie
 
             return result;
         }
+
+        public static List<FileDesc> GetFiles(string folder)
+        {
+            List<FileDesc> result = new List<FileDesc>();
+
+            string[] displayImagesRaw = Directory.GetFiles(folder);
+
+            List<string> displayImages = new List<string>(displayImagesRaw);
+            displayImages.Sort();
+
+            foreach (string filePath in displayImages)
+            {
+                string fileName = filePath.Substring(filePath.LastIndexOf("\\") + 1);
+                string fileExt = fileName.Split('.').Last().ToLower();
+
+                FileDesc fileDesc = new FileDesc { Path = filePath, Ext = fileExt, Name = fileName };
+
+                if (Config.PhotoExtensions.Contains(fileExt))
+                    fileDesc.Type = FileDescType.Photo;
+
+                if (Config.VideoExtensions.Contains(fileExt))
+                    fileDesc.Type = FileDescType.Video;
+
+                if (Config.DataExtensions.Contains(fileExt))
+                    fileDesc.Type = FileDescType.Data;
+
+                if (fileDesc.Type != FileDescType.Unknown)
+                    result.Add(fileDesc);
+            }
+
+            return result;
+        }
     }
 }

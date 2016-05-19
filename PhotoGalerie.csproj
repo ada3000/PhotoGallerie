@@ -44,6 +44,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -62,6 +64,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DownloadFolder.aspx" />
     <Content Include="Global.asax" />
     <Content Include="log4net.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -107,7 +110,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PositionWrapperStream.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="DownloadFolder.aspx.cs">
+      <DependentUpon>DownloadFolder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DownloadFolder.aspx.designer.cs">
+      <DependentUpon>DownloadFolder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FileDesc.cs" />
     <Compile Include="FolderHelper.cs" />
     <Compile Include="Download.aspx.cs">
       <DependentUpon>Download.aspx</DependentUpon>

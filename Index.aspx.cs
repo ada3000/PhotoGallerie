@@ -61,24 +61,38 @@ namespace PhotoGalerie
                 AddFolder(folderName, folderParam + (folderParam != "" ? "," : "") + i);
             }
 
-            string[] displayImagesRaw = Directory.GetFiles(pageFolder);
+            var files = FolderHelper.GetFiles(pageFolder);
+            
+            foreach (var file in files)
+                AddItem(file, folderParam);
 
-            List<string> displayImages = new List<string>(displayImagesRaw);
-            displayImages.Sort();
+            InitDownloadButton(files, folderParam);
+        }
 
-            foreach (string s in displayImages)
+        private void InitDownloadButton(List<FileDesc> files, string folderParam)
+        {
+            if (files.Count == 0)
             {
-                string fileName = s.Substring(s.LastIndexOf("\\") + 1);
-                string fileExt = fileName.Split('.').Last().ToLower();
+                DownloadFolderButton.Visible = false;
+                return;
+            }
 
-                if (Config.PhotoExtensions.Contains(fileExt))
-                    AddImage(fileName, folderParam);
+            DownloadFolderButton.Attributes["data-folder"] = folderParam;
+        }
 
-                if (Config.VideoExtensions.Contains(fileExt))
-                    AddVideo(fileName, folderParam);
-
-                if (Config.DataExtensions.Contains(fileExt))
-                    AddData(fileName, folderParam);
+        private void AddItem(FileDesc file, string folderParam)
+        {
+            switch (file.Type)
+            {
+                case FileDescType.Photo:
+                    AddImage(file.Name, folderParam);
+                    break;
+                case FileDescType.Video:
+                    AddVideo(file.Name, folderParam);
+                    break;
+                case FileDescType.Data:
+                    AddData(file.Name, folderParam);
+                    break;
             }
         }
 

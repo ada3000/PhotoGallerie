@@ -38,6 +38,7 @@
 
             <li class="item last"><a href="#">&nbsp;</a></li>
         </ul>
+        <div class="download-folder js-download-folder" id="DownloadFolderButton" title="Download folder" runat="server"><div class="icon">&nbsp;</div></div>
     </div>
 
     <div class="version">v<%= PhotoGalerie.Config.Version %></div>

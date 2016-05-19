@@ -56,3 +56,22 @@
     background-size: auto 2em;
     line-height: 1em;
 }
+.toolbar .download-folder
+{
+    position:absolute;
+    right:0;
+    top:0;
+
+    cursor: pointer;
+    width: 2em;    
+    height: 2em;
+    
+    background-color: rgba(0,0,0,0.2);    
+}
+.toolbar .download-folder .icon
+{
+    width: 2em;    
+    height: 2em;
+    background: url(../Images/download.svg) no-repeat 0.5em 0.5em;
+    background-size: 1em;    
+}

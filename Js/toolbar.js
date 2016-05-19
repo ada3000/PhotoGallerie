@@ -3,6 +3,7 @@
     var Css =
         {
             container: ".js-toolbar",
+            downloadFolderButton: ".js-download-folder",
             item: ".item"
         };
 
@@ -21,4 +22,9 @@
         currentFolderName = toolbarPathData[toolbarPathData.length - 1].Title;
 
     $("<li class=\"item last\"><a href=\"#\">" + currentFolderName + "</a></li>").appendTo(container);
+
+    $(Css.downloadFolderButton).click(function (ev)
+    {
+        location.href = "DownloadFolder.aspx?folder=" + $(ev.currentTarget).data("folder");
+    });
 })
