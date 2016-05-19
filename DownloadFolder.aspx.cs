@@ -38,7 +38,8 @@ namespace PhotoGalerie
         /// </summary>
         private void ProcessDownloadMode(string fileName)
         {
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + HttpUtility.HtmlEncode(fileName));
+            fileName = fileName.Replace(' ', '_');
+            Response.AppendHeader("Content-Disposition", "attachment; filename*=UTF-8''" + HttpUtility.UrlEncode(fileName));
         }
 
         private void ProcessCacheMode()
