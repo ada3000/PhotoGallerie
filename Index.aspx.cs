@@ -58,7 +58,7 @@ namespace PhotoGalerie
                 //skip .sync folder
                 if (folderName.IndexOf(".") == 0) continue;
 
-                AddFolder(folderName, folderParam + (folderParam != "" ? "," : "") + i);
+                AddFolder(folderName, folderParam + (folderParam != "" ? "," : "") + i, GetFilesCount(folder));
             }
 
             var files = FolderHelper.GetFiles(pageFolder);
@@ -67,6 +67,12 @@ namespace PhotoGalerie
                 AddItem(file, folderParam);
 
             InitDownloadButton(files, folderParam);
+        }
+
+        private int GetFilesCount(string folderPath)
+        {
+            DirectoryInfo di = new DirectoryInfo(folderPath);
+            return di.EnumerateFiles().Count();
         }
 
         private void InitDownloadButton(List<FileDesc> files, string folderParam)
@@ -124,15 +130,15 @@ namespace PhotoGalerie
                 "image js-image");
         }
 
-        private void AddFolder(string name, string id)
+        private void AddFolder(string name, string id, int? files = null)
         {
             string navUrl = string.IsNullOrEmpty(id) ? "/" : "?folder=" + id;
             string cssClass = name == ParentFolderName ? "folder-back" : "folder";
 
-            AddItem(NormalizeFolderName(name), name, EmptyIcon, navUrl, "", false, cssClass);
+            AddItem(NormalizeFolderName(name), name, EmptyIcon, navUrl, "", false, cssClass, files?.ToString());
         }
 
-        private void AddItem(string name, string title, string previewImageUrl, string navigateUrl, string downloadUrl, bool newWindow, string cssClass = "")
+        private void AddItem(string name, string title, string previewImageUrl, string navigateUrl, string downloadUrl, bool newWindow, string cssClass = "", string topInfo="")
         {
             Panel pan = new Panel { CssClass = "img " + cssClass };
             HyperLink link = new HyperLink { Target = newWindow ? "_blank" : "", NavigateUrl = navigateUrl, ToolTip = title };
@@ -146,6 +152,11 @@ namespace PhotoGalerie
             link.Controls.Add(lb);
             form1.Controls.Add(pan);
 
+            if(!string.IsNullOrEmpty(topInfo))
+            {
+                Label lbTopInfo = new Label { CssClass = "top-info", Text = topInfo };
+                pan.Controls.Add(lbTopInfo);
+            }
         }
 
         private static string NormalizeFolderName(string folder)
