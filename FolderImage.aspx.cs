@@ -61,10 +61,20 @@ namespace PhotoGalerie
         {
             DirectoryInfo di = new DirectoryInfo(folder);
 
-            return di.EnumerateFiles()
+            string[] result =  di.EnumerateFiles()
                 .Where(f => Config.PhotoExtensions.Contains(f.Extension.Substring(1).ToLower()))
                 .Select(f => f.FullName)
                 .Take(limit).ToArray();
+
+            if(result==null || result.Length==0)
+                foreach(var subFolder in di.EnumerateDirectories())
+                {
+                    result = GetImages(subFolder.FullName, limit);
+                    if (result != null && result.Length > 0)
+                        break;
+                }
+
+            return result;
         }
     }
 }
