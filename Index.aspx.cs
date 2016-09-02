@@ -16,6 +16,8 @@ namespace PhotoGalerie
         private string imgShowTemplate = "image.aspx?w=1024&h=768&file={0}&folder={1}&mode=fill";
         private string imgFullTemplate = "Download.aspx?type=i&file={0}&folder={1}&download=true";
 
+        private string folderImgTemplate = "FolderImage.aspx?w=217&h=217&&folder={0}";
+        
         private string EmptyIcon = @"Images/1.gif";
 
         private string videoPriviewUrl = "Images/video.png";
@@ -135,7 +137,7 @@ namespace PhotoGalerie
             string navUrl = string.IsNullOrEmpty(id) ? "/" : "?folder=" + id;
             string cssClass = name == ParentFolderName ? "folder-back" : "folder";
 
-            AddItem(NormalizeFolderName(name), name, EmptyIcon, navUrl, "", false, cssClass, files?.ToString());
+            AddItem(NormalizeFolderName(name), name, string.Format(folderImgTemplate, id), navUrl, "", false, cssClass, files?.ToString());
         }
 
         private void AddItem(string name, string title, string previewImageUrl, string navigateUrl, string downloadUrl, bool newWindow, string cssClass = "", string topInfo="")

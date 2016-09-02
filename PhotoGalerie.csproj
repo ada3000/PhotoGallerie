@@ -66,6 +66,7 @@
   <ItemGroup>
     <Content Include="DownloadFolder.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="FolderImage.aspx" />
     <Content Include="log4net.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -110,6 +111,14 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FolderImage.aspx.cs">
+      <DependentUpon>FolderImage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FolderImage.aspx.designer.cs">
+      <DependentUpon>FolderImage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ImageHelper.cs" />
     <Compile Include="PositionWrapperStream.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="DownloadFolder.aspx.cs">
