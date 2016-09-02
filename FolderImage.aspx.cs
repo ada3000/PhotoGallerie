@@ -25,10 +25,15 @@ namespace PhotoGalerie
         {
             int width = int.Parse(Request.QueryString.Get("w"));
             int height = int.Parse(Request.QueryString.Get("h"));
+            int itemPadding = 4;
+
+            int itemWidth = (width - 3 * itemPadding) / 2;
+            int itemHeight = (height - 3 * itemPadding) / 2;
 
             string folder = GetFolderPath();
             string[] imagesPath = GetImages(folder, 4);
-            Bitmap[] images = imagesPath.Select(i => ImageHelper.ResizeCrop(i, width / 2, height / 2)).ToArray();
+
+            Bitmap[] images = imagesPath.Select(i => ImageHelper.ResizeCrop(i, itemWidth, itemHeight)).ToArray();
 
             using (Bitmap result = new Bitmap(width, height, PixelFormat.Format32bppArgb))
             using (Graphics gr = Graphics.FromImage(result))
@@ -36,10 +41,10 @@ namespace PhotoGalerie
                 //gr.Clear(Color.White);
                 //result.MakeTransparent(Color.White);
 
-                if (images.Length > 0) gr.DrawImage(images[0], 0, 0);
-                if (images.Length > 1) gr.DrawImage(images[1], width / 2, 0);
-                if (images.Length > 2) gr.DrawImage(images[2], 0, height / 2);
-                if (images.Length > 3) gr.DrawImage(images[3], width / 2, height / 2);
+                if (images.Length > 0) gr.DrawImage(images[0], itemPadding, itemPadding);
+                if (images.Length > 1) gr.DrawImage(images[1], itemWidth + 2 * itemPadding, itemPadding);
+                if (images.Length > 2) gr.DrawImage(images[2], itemPadding, itemHeight + 2 * itemPadding);
+                if (images.Length > 3) gr.DrawImage(images[3], itemWidth + 2 * itemPadding, itemHeight + 2 * itemPadding);
 
                 foreach (var img in images)
                     img.Dispose();

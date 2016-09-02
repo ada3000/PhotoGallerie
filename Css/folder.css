@@ -19,7 +19,7 @@
     border: solid 0.1em transparent;
     border-radius: 0.2em;
     padding:0.2em;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.6);
     font-size: 80%;
 }
 
@@ -75,8 +75,8 @@
     .img.folder a,
     .img.video a
     {
-        background: url(../Images/Design/item_overlay.png) no-repeat left top;
-        background-size: 100%;
+        _background: url(../Images/Design/item_overlay.png) no-repeat left top;
+        _background-size: 100%;
     }
 
     .img.video {
@@ -90,11 +90,14 @@
         bottom: 0;
         left: 0;
         right: 0;
-        height: 40%;
         color: white;
         overflow: hidden;
         vertical-align: central;
-        margin: 0.1em;
+        padding: 0.1em;
+        
+    }
+    .img.folder .label {
+        background-color: rgba(0,0,0,0.6);
     }
 
 @media screen and (-webkit-device-pixel-ratio:1.5),(device-pixel-ratio:1.5),(max-resolution: 150dpi) and (max-width: 1920px) 

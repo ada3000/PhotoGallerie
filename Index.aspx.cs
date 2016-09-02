@@ -17,7 +17,7 @@ namespace PhotoGalerie
         private string imgFullTemplate = "Download.aspx?type=i&file={0}&folder={1}&download=true";
 
         private string folderImgTemplate = "FolderImage.aspx?w=217&h=217&&folder={0}";
-        
+
         private string EmptyIcon = @"Images/1.gif";
 
         private string videoPriviewUrl = "Images/video.png";
@@ -64,17 +64,18 @@ namespace PhotoGalerie
             }
 
             var files = FolderHelper.GetFiles(pageFolder);
-            
+
             foreach (var file in files)
                 AddItem(file, folderParam);
 
             InitDownloadButton(files, folderParam);
         }
 
-        private int GetFilesCount(string folderPath)
+        private int? GetFilesCount(string folderPath)
         {
             DirectoryInfo di = new DirectoryInfo(folderPath);
-            return di.EnumerateFiles().Count();
+            int result = di.EnumerateFiles().Count() + di.EnumerateDirectories().Count();
+            return result == 0 ? null : (int?)result;
         }
 
         private void InitDownloadButton(List<FileDesc> files, string folderParam)
@@ -134,19 +135,23 @@ namespace PhotoGalerie
 
         private void AddFolder(string name, string id, int? files = null)
         {
-            string navUrl = string.IsNullOrEmpty(id) ? "/" : "?folder=" + id;
-            string cssClass = name == ParentFolderName ? "folder-back" : "folder";
+            bool isFolderBack = name == ParentFolderName;
 
-            AddItem(NormalizeFolderName(name), name, string.Format(folderImgTemplate, id), navUrl, "", false, cssClass, files?.ToString());
+            string navUrl = string.IsNullOrEmpty(id) ? "/" : "?folder=" + id;
+            string cssClass = isFolderBack ? "folder-back" : "folder";
+            string folderIconUrl = isFolderBack ? EmptyIcon : string.Format(folderImgTemplate, id);
+
+            AddItem(NormalizeFolderName(name), name, folderIconUrl, navUrl, "", false, cssClass, files?.ToString());
         }
 
-        private void AddItem(string name, string title, string previewImageUrl, string navigateUrl, string downloadUrl, bool newWindow, string cssClass = "", string topInfo="")
+        private void AddItem(string name, string title, string previewImageUrl, string navigateUrl, string downloadUrl, bool newWindow, string cssClass = "", string topInfo = "")
         {
             Panel pan = new Panel { CssClass = "img " + cssClass };
             HyperLink link = new HyperLink { Target = newWindow ? "_blank" : "", NavigateUrl = navigateUrl, ToolTip = title };
             link.Attributes.Add("download-url", downloadUrl);
 
             Image img = new Image { AlternateText = title, ImageUrl = previewImageUrl };
+
             Label lb = new Label { CssClass = "label", Text = name };
 
             pan.Controls.Add(link);
@@ -154,7 +159,7 @@ namespace PhotoGalerie
             link.Controls.Add(lb);
             form1.Controls.Add(pan);
 
-            if(!string.IsNullOrEmpty(topInfo))
+            if (!string.IsNullOrEmpty(topInfo))
             {
                 Label lbTopInfo = new Label { CssClass = "top-info", Text = topInfo };
                 pan.Controls.Add(lbTopInfo);
@@ -169,7 +174,7 @@ namespace PhotoGalerie
         private static string NormalizeFileName(string file)
         {
             int idx = file.LastIndexOf('.');
-            return idx>-1 ? file.Substring(0, idx) : file;
+            return idx > -1 ? file.Substring(0, idx) : file;
         }
     }
 }
