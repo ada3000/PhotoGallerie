@@ -111,6 +111,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\BinaryCache.cs" />
     <Compile Include="FolderImage.aspx.cs">
       <DependentUpon>FolderImage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -118,9 +119,9 @@
     <Compile Include="FolderImage.aspx.designer.cs">
       <DependentUpon>FolderImage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ImageHelper.cs" />
-    <Compile Include="PositionWrapperStream.cs" />
-    <Compile Include="Config.cs" />
+    <Compile Include="Code\ImageHelper.cs" />
+    <Compile Include="Code\PositionWrapperStream.cs" />
+    <Compile Include="Code\Config.cs" />
     <Compile Include="DownloadFolder.aspx.cs">
       <DependentUpon>DownloadFolder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -128,8 +129,8 @@
     <Compile Include="DownloadFolder.aspx.designer.cs">
       <DependentUpon>DownloadFolder.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FileDesc.cs" />
-    <Compile Include="FolderHelper.cs" />
+    <Compile Include="Code\FileDesc.cs" />
+    <Compile Include="Code\FolderHelper.cs" />
     <Compile Include="Download.aspx.cs">
       <DependentUpon>Download.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -137,7 +138,7 @@
     <Compile Include="Download.aspx.designer.cs">
       <DependentUpon>Download.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FolderInfo.cs" />
+    <Compile Include="Code\FolderInfo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -157,7 +158,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

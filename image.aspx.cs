@@ -32,24 +32,31 @@ namespace PhotoGalerie
             int height = int.Parse(Request.QueryString.Get("h"));
 
             string resizeMode = Request.QueryString.Get("mode") ?? "crop"; //fill | crop
+            string filePath = GetFilePath();
 
-            using (Image img = Image.FromFile(GetFilePath()))
-            {
-                Bitmap newImage = null;
-                if (resizeMode == "fill")
-                    newImage = ImageHelper.ResizeFill(img, width, height);
-                else
-                    newImage = ImageHelper.ResizeCrop(img, width, height);
+            string imageKey = filePath + "_" + width + "_" + height + "_" + resizeMode;
 
-                using (newImage)
+            byte[] imgData = BinaryCache.Instance.Load(imageKey);
+
+            if (imgData == null)
+                using (Image img = Image.FromFile(filePath))
                 {
-                    byte[] imgData = ImageHelper.SaveToJpeg(newImage, ImgDefaultQuality);
+                    Bitmap newImage = null;
+                    if (resizeMode == "fill")
+                        newImage = ImageHelper.ResizeFill(img, width, height);
+                    else
+                        newImage = ImageHelper.ResizeCrop(img, width, height);
 
-                    Response.ContentType = "image/jpeg";
-                    Response.Cache.SetExpires(DateTime.UtcNow.AddHours(24));
-                    Response.OutputStream.Write(imgData, 0, imgData.Length);
+                    using (newImage)
+                    {
+                        imgData = ImageHelper.SaveToJpeg(newImage, ImgDefaultQuality);
+                        BinaryCache.Instance.Store(imageKey, imgData);
+                    }
                 }
-            }
+
+            Response.ContentType = "image/jpeg";
+            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(24));
+            Response.OutputStream.Write(imgData, 0, imgData.Length);
         }
     }
 }

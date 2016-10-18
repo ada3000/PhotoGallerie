@@ -31,43 +31,47 @@ namespace PhotoGalerie
             int itemHeight = (height - 3 * itemPadding) / 2;
 
             string folder = GetFolderPath();
-            string[] imagesPath = GetImages(folder, 4);
 
-            Bitmap[] images = imagesPath.Select(i => ImageHelper.ResizeCrop(i, itemWidth, itemHeight)).ToArray();
+            string folderKey = folder + "_" + width + "_" + height + "_" + itemPadding;
 
-            using (Bitmap result = new Bitmap(width, height, PixelFormat.Format32bppArgb))
-            using (Graphics gr = Graphics.FromImage(result))
-            {
-                //gr.Clear(Color.White);
-                //result.MakeTransparent(Color.White);
+            byte[] imgData = BinaryCache.Instance.Load(folderKey);
 
-                if (images.Length > 0) gr.DrawImage(images[0], itemPadding, itemPadding);
-                if (images.Length > 1) gr.DrawImage(images[1], itemWidth + 2 * itemPadding, itemPadding);
-                if (images.Length > 2) gr.DrawImage(images[2], itemPadding, itemHeight + 2 * itemPadding);
-                if (images.Length > 3) gr.DrawImage(images[3], itemWidth + 2 * itemPadding, itemHeight + 2 * itemPadding);
+            if (imgData == null)
+                using (Bitmap result = new Bitmap(width, height, PixelFormat.Format32bppArgb))
+                using (Graphics gr = Graphics.FromImage(result))
+                {
+                    string[] imagesPath = GetImages(folder, 4);
 
-                foreach (var img in images)
-                    img.Dispose();
+                    Bitmap[] images = imagesPath.Select(i => ImageHelper.ResizeCrop(i, itemWidth, itemHeight)).ToArray();
 
-                byte[] imgData = ImageHelper.SaveToPng(result);
+                    if (images.Length > 0) gr.DrawImage(images[0], itemPadding, itemPadding);
+                    if (images.Length > 1) gr.DrawImage(images[1], itemWidth + 2 * itemPadding, itemPadding);
+                    if (images.Length > 2) gr.DrawImage(images[2], itemPadding, itemHeight + 2 * itemPadding);
+                    if (images.Length > 3) gr.DrawImage(images[3], itemWidth + 2 * itemPadding, itemHeight + 2 * itemPadding);
 
-                Response.ContentType = "image/png";
-                Response.Cache.SetExpires(DateTime.UtcNow.AddHours(24));
-                Response.OutputStream.Write(imgData, 0, imgData.Length);
-            }
+                    foreach (var img in images)
+                        img.Dispose();
+
+                    imgData = ImageHelper.SaveToPng(result);
+                    BinaryCache.Instance.Store(folderKey, imgData);
+                }
+
+            Response.ContentType = "image/png";
+            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(24));
+            Response.OutputStream.Write(imgData, 0, imgData.Length);
         }
 
         private string[] GetImages(string folder, int limit)
         {
             DirectoryInfo di = new DirectoryInfo(folder);
 
-            string[] result =  di.EnumerateFiles()
+            string[] result = di.EnumerateFiles()
                 .Where(f => Config.PhotoExtensions.Contains(f.Extension.Substring(1).ToLower()))
                 .Select(f => f.FullName)
                 .Take(limit).ToArray();
 
-            if(result==null || result.Length==0)
-                foreach(var subFolder in di.EnumerateDirectories())
+            if (result == null || result.Length == 0)
+                foreach (var subFolder in di.EnumerateDirectories())
                 {
                     result = GetImages(subFolder.FullName, limit);
                     if (result != null && result.Length > 0)
