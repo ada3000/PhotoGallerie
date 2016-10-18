@@ -32,24 +32,11 @@ namespace PhotoGalerie
             }
         }
 
-        private string _folder = string.Empty;
-
         private string Folder
         {
             get
             {
-                if (!IsNullOrEmpty(_folder)) return _folder;
-                lock (this)
-                {
-                    if (!IsNullOrEmpty(_folder)) return _folder;
-                    string folder = HttpContext.Current.Server.MapPath("~/App_Data/BinaryCache");
-                 // VirtualPathUtility.ToAbsolute("~/App_Data/BinaryCache");
-                    if (!Directory.Exists(folder))
-                        Directory.CreateDirectory(folder);
-
-                    _folder = folder;
-                }
-                return _folder;
+                return Config.BinaryCacheFolder;
             }
         }
 

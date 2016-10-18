@@ -78,5 +78,14 @@ namespace PhotoGalerie
                 return _title ?? (_title = ConfigurationManager.AppSettings["title"]);
             }
         }
+
+        private static string _binaryCacheFolder;
+        public static string BinaryCacheFolder
+        {
+            get
+            {
+                return _binaryCacheFolder ?? (_binaryCacheFolder = ConfigurationManager.AppSettings["binaryCacheFolder"]);
+            }
+        }
     }
 }
