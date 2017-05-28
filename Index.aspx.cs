@@ -13,7 +13,8 @@ namespace PhotoGalerie
     {
         private const string ParentFolderName = "";
         private string imgPreviewTemplate = "image.aspx?w=217&h=217&file={0}&folder={1}&mode=crop";
-        private string imgShowTemplate = "image.aspx?w=1024&h=768&file={0}&folder={1}&mode=fill";
+        private string imgShowHdTemplate = "image.aspx?w=1230&h=768&file={0}&folder={1}&mode=fill";
+        private string imgShowFullHdTemplate = "image.aspx?w=1600&h=1000&file={0}&folder={1}&mode=fill";
         private string imgFullTemplate = "Download.aspx?type=i&file={0}&folder={1}&download=true";
 
         private string folderImgTemplate = "FolderImage.aspx?w=217&h=217&&folder={0}";
@@ -127,7 +128,7 @@ namespace PhotoGalerie
             AddItem("",
                 NormalizeFileName(fileName),
                 string.Format(imgPreviewTemplate, fileName, folderParam),
-                string.Format(imgShowTemplate, fileName, folderParam),
+                string.Format(Request.Browser.IsMobileDevice ? imgShowHdTemplate : imgShowFullHdTemplate, fileName, folderParam),
                 string.Format(imgFullTemplate, fileName, folderParam),
                 true,
                 "image js-image");
