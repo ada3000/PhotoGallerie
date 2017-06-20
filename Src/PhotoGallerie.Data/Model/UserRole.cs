@@ -8,8 +8,9 @@ using SqlLib;
 
 namespace PhotoGallerie.Data
 {
-    public class User: DomainObjectBase<int>
+    public class UserRole: DomainObjectBase<int>
     {
-        public string Name { get; set; }
+        public int UserId { get; set; }
+        public int RoleId { get; set; }
     }
 }

@@ -42,8 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserRepository.cs" />
+    <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\FolderAccess.cs" />
+    <Compile Include="Model\UserRole.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="SimpleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

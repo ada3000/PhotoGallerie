@@ -56,10 +56,11 @@
     background-size: auto 2em;
     line-height: 1em;
 }
-.toolbar .download-folder
+.toolbar .download-folder,
+.toolbar .login
 {
     position:absolute;
-    right:0;
+    right:2.1em;
     top:0;
 
     cursor: pointer;
@@ -68,10 +69,20 @@
     
     background-color: rgba(0,0,0,0.2);    
 }
-.toolbar .download-folder .icon
+.toolbar .login
+{
+    right:0em;
+}
+.toolbar .download-folder .icon,
+.toolbar .login .icon
 {
     width: 2em;    
     height: 2em;
     background: url(../Images/download.svg) no-repeat 0.5em 0.5em;
     background-size: 1em;    
+}
+
+.toolbar .login .icon
+{
+    background-image: url(../Images/login.svg);
 }

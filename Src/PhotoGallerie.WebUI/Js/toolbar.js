@@ -4,6 +4,7 @@
         {
             container: ".js-toolbar",
             downloadFolderButton: ".js-download-folder",
+            loginButton: ".js-login",
             item: ".item"
         };
 
@@ -26,5 +27,10 @@
     $(Css.downloadFolderButton).click(function (ev)
     {
         location.href = "DownloadFolder.aspx?folder=" + $(ev.currentTarget).data("folder");
+    });
+
+    $(Css.loginButton).click(function (ev)
+    {
+        location.href = "Login.aspx";
     });
 })

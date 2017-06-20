@@ -10,7 +10,7 @@ namespace PhotoGallerie.Tests
         [TestMethod]
         public void Crud()
         {
-            UserRepository repo = new UserRepository();
+            var repo = new SimpleRepository<User>();
 
             var expected = new User
             {

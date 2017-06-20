@@ -27,8 +27,10 @@ namespace PhotoGalerie
 
                     List<string> folders = Directory.GetDirectories(pageFolder).ToList();
                     folders.Sort();
+                    int folderHash = int.Parse(folderIndex);
 
-                    pageFolder = folders[int.Parse(folderIndex)];
+                    pageFolder = folders.First(f=>f.GetHashCode()== folderHash);
+
                     folderName = pageFolder.Substring(pageFolder.LastIndexOf("\\")+1);
 
                     result.Folders.Add(new FolderInfo.Item

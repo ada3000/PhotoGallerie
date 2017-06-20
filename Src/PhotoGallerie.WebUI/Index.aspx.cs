@@ -1,11 +1,16 @@
-﻿using System;
+﻿using PhotoGallerie.Data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
+using Newtonsoft.Json;
+using System.Web.Security;
 
 namespace PhotoGalerie
 {
@@ -52,8 +57,10 @@ namespace PhotoGalerie
 
             string[] displayFoldersRaw = Directory.GetDirectories(pageFolder);
             List<string> displayFolders = new List<string>(displayFoldersRaw);
-            displayFolders.Sort();
+            displayFolders = FilterFoldersByAccess(displayFolders);
 
+            displayFolders.Sort();
+            
             for (int i = 0; i < displayFolders.Count; i++)
             {
                 string folder = displayFolders[i];
@@ -61,7 +68,7 @@ namespace PhotoGalerie
                 //skip .sync folder
                 if (folderName.IndexOf(".") == 0) continue;
 
-                AddFolder(folderName, folderParam + (folderParam != "" ? "," : "") + i, GetFilesCount(folder));
+                AddFolder(folderName, folderParam + (folderParam != "" ? "," : "") + folder.GetHashCode(), GetFilesCount(folder));
             }
 
             var files = FolderHelper.GetFiles(pageFolder);
@@ -72,6 +79,47 @@ namespace PhotoGalerie
             InitDownloadButton(files, folderParam);
         }
 
+        private List<string> FilterFoldersByAccess(List<string> displayFolders)
+        {
+            if (User.IsInRole("Admin")) return displayFolders;
+
+            List<string> result = new List<string>();
+            var roleId = UserRoleId;
+
+            var foldersForRole = new HashSet<string>(new SimpleRepository<FolderAccess>().All().Where(a => a.RoleId == roleId).Select(f=>f.FolderPath));
+            foreach(var folder in displayFolders)
+            {
+                var folderStart = folder.Substring(Config.BaseFolder.Length);
+                var nextFolderIndex = folderStart.IndexOf('\\', 1);
+                if (nextFolderIndex > -1)
+                    folderStart = folderStart.Substring(0, nextFolderIndex);
+
+                if (foldersForRole.Contains(folderStart))
+                    result.Add(folder);
+            }
+
+            return result;
+        }
+
+        private int UserId
+        {
+            get
+            {
+                var indentity = User.Identity as FormsIdentity;
+                //var repo = new SimpleRepository<User>();
+                var userInfo = JsonConvert.DeserializeObject<User>(indentity.Ticket.UserData);
+                return userInfo.Id;
+            }
+        }
+
+        private int UserRoleId
+        {
+            get
+            {
+                var repo = new SimpleRepository<UserRole>();
+                return repo.All().First(r => r.UserId == UserId).RoleId;
+            }
+        }
         private int? GetFilesCount(string folderPath)
         {
             DirectoryInfo di = new DirectoryInfo(folderPath);
