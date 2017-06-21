@@ -1,9 +1,11 @@
 ﻿using log4net;
+using PhotoGalerie.Code;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
+using System.Web.Http;
 using System.Web.Security;
 using System.Web.SessionState;
 
@@ -21,7 +23,32 @@ namespace PhotoGalerie
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            GlobalConfiguration.Configure(RegisterWebApi);
+        }
 
+        public static void RegisterWebApi(HttpConfiguration config)
+        {
+            // TODO: Add any additional configuration code.
+
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "ApiWithActions",
+                routeTemplate: "apia/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+            // WebAPI when dealing with JSON & JavaScript!
+            // Setup json serialization to serialize classes to camel (std. Json format)
+            var formatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+            formatter.SerializerSettings.ContractResolver =
+                new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -56,12 +83,7 @@ namespace PhotoGalerie
 
         private void SetGuestPrincipial()
         {
-            FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
-                1, "Guest", DateTime.Now, 
-                DateTime.Now.AddMinutes(20), false, "{\"Id\":10}");
-
-            FormsIdentity id = new FormsIdentity(authTicket);
-            Context.User = new GenericPrincipal(id, new[] { "Guest" });
+            UserHelper.SetUser(10, "Guest", "Guest");
         }
 
         protected void Application_Error(object sender, EventArgs e)

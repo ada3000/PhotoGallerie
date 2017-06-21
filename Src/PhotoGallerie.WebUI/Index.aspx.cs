@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 
 using Newtonsoft.Json;
 using System.Web.Security;
+using PhotoGalerie.Code;
 
 namespace PhotoGalerie
 {
@@ -84,7 +85,7 @@ namespace PhotoGalerie
             if (User.IsInRole("Admin")) return displayFolders;
 
             List<string> result = new List<string>();
-            var roleId = UserRoleId;
+            var roleId = UserHelper.UserRoleId;
 
             var foldersForRole = new HashSet<string>(new SimpleRepository<FolderAccess>().All().Where(a => a.RoleId == roleId).Select(f=>f.FolderPath));
             foreach(var folder in displayFolders)
@@ -100,26 +101,7 @@ namespace PhotoGalerie
 
             return result;
         }
-
-        private int UserId
-        {
-            get
-            {
-                var indentity = User.Identity as FormsIdentity;
-                //var repo = new SimpleRepository<User>();
-                var userInfo = JsonConvert.DeserializeObject<User>(indentity.Ticket.UserData);
-                return userInfo.Id;
-            }
-        }
-
-        private int UserRoleId
-        {
-            get
-            {
-                var repo = new SimpleRepository<UserRole>();
-                return repo.All().First(r => r.UserId == UserId).RoleId;
-            }
-        }
+        
         private int? GetFilesCount(string folderPath)
         {
             DirectoryInfo di = new DirectoryInfo(folderPath);
