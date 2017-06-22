@@ -29,9 +29,10 @@ namespace PhotoGalerie
                     folders.Sort();
                     int folderHash = int.Parse(folderIndex);
 
-                    pageFolder = folders.First(f=>f.GetHashCode()== folderHash);
+                    pageFolder = folders
+                        .First(f => f.GetFolderId() == folderHash);
 
-                    folderName = pageFolder.Substring(pageFolder.LastIndexOf("\\")+1);
+                    folderName = pageFolder.Substring(pageFolder.LastIndexOf("\\") + 1);
 
                     result.Folders.Add(new FolderInfo.Item
                     {
@@ -44,6 +45,11 @@ namespace PhotoGalerie
             result.Path = pageFolder;
 
             return result;
+        }
+
+        public static int GetFolderId(this string folder)
+        {
+            return folder.Substring(Config.BaseFolder.Length + 1).GetHashCode();
         }
 
         public static List<FileDesc> GetFiles(string folder)

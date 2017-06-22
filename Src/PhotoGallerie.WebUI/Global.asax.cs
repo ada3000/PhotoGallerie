@@ -83,7 +83,7 @@ namespace PhotoGalerie
 
         private void SetGuestPrincipial()
         {
-            UserHelper.SetUser(10, "Guest", "Guest");
+            UserHelper.SetUser(10, "guest", "guest");
         }
 
         protected void Application_Error(object sender, EventArgs e)

@@ -69,7 +69,7 @@ namespace PhotoGalerie
                 //skip .sync folder
                 if (folderName.IndexOf(".") == 0) continue;
 
-                AddFolder(folderName, folderParam + (folderParam != "" ? "," : "") + folder.GetHashCode(), GetFilesCount(folder));
+                AddFolder(folderName, folderParam + (folderParam != "" ? "," : "") + folder.GetFolderId(), GetFilesCount(folder));
             }
 
             var files = FolderHelper.GetFiles(pageFolder);
@@ -82,7 +82,7 @@ namespace PhotoGalerie
 
         private List<string> FilterFoldersByAccess(List<string> displayFolders)
         {
-            if (User.IsInRole("Admin")) return displayFolders;
+            if (User.IsInRole("admin")) return displayFolders;
 
             List<string> result = new List<string>();
             var roleId = UserHelper.UserRoleId;
