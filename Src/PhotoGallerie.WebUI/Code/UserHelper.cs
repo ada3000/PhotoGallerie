@@ -20,6 +20,22 @@ namespace PhotoGalerie.Code
             return userInfo.Id;
         }
 
+        public static int GetUserId(string login)
+        {
+            var user = new SimpleRepository<User>().All().FirstOrDefault(u=>u.Name==login);
+
+            if (user == null) return -1;
+            return user.Id;
+        }
+
+        public static string GetUserPwd(int userId)
+        {
+            var repo = new SimpleRepository<User>();
+            var user = repo.Get(userId);
+
+            return user?.Pwd;
+        }
+
         public static void SetUser(int id, string name, string role)
         {
             FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(

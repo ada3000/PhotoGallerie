@@ -7,7 +7,8 @@ namespace PhotoGalerie.Models
 {
     public class CommonResponse
     {
-        public CommonResponseStatus Status { get; set; }
+        public string Status { get { return StatusEx.ToString(); } }
+        public CommonResponseStatus StatusEx { get; set; }
         public object Data { get; set; }
         public int ErrorCode { get; set; }
         public string ErrorMessage { get; set; }
@@ -16,7 +17,7 @@ namespace PhotoGalerie.Models
 
         public CommonResponse(CommonResponseStatus status)
         {
-            Status = status;
+            StatusEx = status;
         }
 
         public static CommonResponse Success

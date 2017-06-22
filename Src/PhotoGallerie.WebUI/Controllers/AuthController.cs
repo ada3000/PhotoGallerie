@@ -19,11 +19,13 @@ namespace PhotoGalerie.Controllers
         const string MdSolt = "PG2106AD$!_";
 
         [HttpPost]
-        public HttpResponseMessage Login(AuthModel model)
+        public HttpResponseMessage Login([FromBody]AuthModel model)
         {
 
             var hash = GetMd5Hash(MdSolt + model.Pwd);
-            if (hash != "xxx")
+            var expectedHash = UserHelper.GetUserPwd(UserHelper.GetUserId(model.Login));
+
+            if (hash != expectedHash)
             {
                 return Request.CreateResponse(
                     HttpStatusCode.OK, CommonResponse.Error
