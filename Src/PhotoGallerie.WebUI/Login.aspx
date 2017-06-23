@@ -14,6 +14,7 @@
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/font-awesome.css" rel="stylesheet" />
     <link href="Content/alertifyjs/alertify.min.css" rel="stylesheet" />
+    <link href="Content/alertifyjs/themes/bootstrap.min.css" rel="stylesheet" />
 
     <script type="text/javascript" src="Js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="Js/jquery.event.move.js"></script>
@@ -67,7 +68,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12 col-lg-2 col-lg-offset-5">
-                <input type="password" placeholder="password" data-bind="value: pwd" class="form-control" />
+                <input type="password" placeholder="password" data-bind="value: pwd, event:{keyup: checkLoginByEnter}" class="form-control" />
             </div>
         </div>
         <div class="row">

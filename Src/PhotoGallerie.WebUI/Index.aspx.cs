@@ -27,7 +27,6 @@ namespace PhotoGalerie
 
         private string EmptyIcon = @"Images/1.gif";
 
-        private string videoPriviewUrl = "Images/video.png";
         private string videoShowTemplate = "Download.aspx?type=v&file={0}&folder={1}";
         private string videoFullTemplate = "Download.aspx?type=v&file={0}&folder={1}&download=true";
 
@@ -82,10 +81,10 @@ namespace PhotoGalerie
 
         private List<string> FilterFoldersByAccess(List<string> displayFolders)
         {
-            if (User.IsInRole("admin")) return displayFolders;
+            if (UserHelper.UserRoleName() == "admin") return displayFolders;
 
             List<string> result = new List<string>();
-            var roleId = UserHelper.UserRoleId;
+            var roleId = UserHelper.UserRoleId();
 
             var foldersForRole = new HashSet<string>(new SimpleRepository<FolderAccess>().All().Where(a => a.RoleId == roleId).Select(f=>f.FolderPath));
             foreach(var folder in displayFolders)

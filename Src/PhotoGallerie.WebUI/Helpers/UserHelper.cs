@@ -22,7 +22,7 @@ namespace PhotoGalerie.Code
 
         public static int GetUserId(string login)
         {
-            var user = new SimpleRepository<User>().All().FirstOrDefault(u=>u.Name==login);
+            var user = new SimpleRepository<User>().All().FirstOrDefault(u => u.Name == login);
 
             if (user == null) return -1;
             return user.Id;
@@ -36,7 +36,7 @@ namespace PhotoGalerie.Code
             return user?.Pwd;
         }
 
-        public static void SetUser(int id, string name, string role)
+        public static FormsAuthenticationTicket SetUser(int id, string name, string role)
         {
             FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
                 1, name, DateTime.Now,
@@ -44,26 +44,22 @@ namespace PhotoGalerie.Code
 
             FormsIdentity fid = new FormsIdentity(authTicket);
             HttpContext.Current.User = new GenericPrincipal(fid, new[] { role });
+
+            return authTicket;
         }
 
-        public static int UserRoleId
+        public static int UserRoleId(int? userId = null)
         {
-            get
-            {
-                var repo = new SimpleRepository<UserRole>();
-                var userId = GetUserId();
-                return repo.All().First(r => r.UserId == userId).RoleId;
-            }
+            var repo = new SimpleRepository<UserRole>();
+            userId = userId ?? GetUserId();
+            return repo.All().First(r => r.UserId == userId).RoleId;
         }
 
-        public static string UserRoleName
+        public static string UserRoleName(int? roleId = null)
         {
-            get
-            {
-                var repo = new SimpleRepository<Role>();
-                var roleId = UserRoleId;
-                return repo.Get(UserRoleId).Name;
-            }
+            var repo = new SimpleRepository<Role>();
+            roleId = roleId ?? UserRoleId();
+            return repo.Get(roleId.Value).Name;
         }
     }
 }

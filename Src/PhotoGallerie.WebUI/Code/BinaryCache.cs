@@ -6,7 +6,6 @@ using System.Web;
 using static System.String;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 
 namespace PhotoGalerie
 {

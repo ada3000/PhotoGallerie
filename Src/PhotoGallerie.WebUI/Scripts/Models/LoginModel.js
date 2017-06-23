@@ -8,12 +8,31 @@
 
         self.checkLoginPwd = function ()
         {
-            $.post("/api/auth/login", { login: self.login(), pwd: self.pwd() })
+            alertify.message("Auth ...");
+            $.get(
+                //"/api/auth/login",
+                "LoginAuth.aspx",
+                { login: self.login(), pwd: self.pwd(), rnd: Math.random() })
                 .done(function (data)
                 {
-                    console.log(data);
+                    if (data && data.Status == "Error")
+                        return alertify.error("Invalid credentials.");
+
+                    alertify.success("Success, redirect to main page.")
+
+                    location.href = "/";
+                })
+                .error(function()
+                {
+                    alertify.error("Invalid credentials.");
                 });
         };
+
+        self.checkLoginByEnter = function(model, ev)
+        {
+            if (ev.keyCode != 13) return;
+            self.checkLoginPwd();
+        }
     }
 
     $(document).ready(function ()
