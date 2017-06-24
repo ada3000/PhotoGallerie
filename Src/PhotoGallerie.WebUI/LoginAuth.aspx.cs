@@ -20,6 +20,16 @@ namespace PhotoGalerie
         {
             Response.ContentType = "application/json";
 
+            string action = Request.QueryString.Get("action") ?? "";
+
+            if (action == "login")
+                DoLogin();
+            if (action == "logout")
+                DoLogout();
+        }
+
+        private void DoLogin()
+        {
             string login = Request.QueryString.Get("login") ?? "";
             string pwd = Request.QueryString.Get("pwd") ?? "";
 
@@ -39,7 +49,13 @@ namespace PhotoGalerie
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
             Response.Cookies.Add(authCookie);
 
-            //resp.Headers.AddCookies(new[] { new CookieHeaderValue(FormsAuthentication.FormsCookieName, encryptedTicket) });
+            Result = CommonResponse.Success.ToJsonString();
+        }
+
+        private void DoLogout()
+        {
+            FormsAuthentication.SignOut();
+            Result = CommonResponse.Success.ToJsonString();
         }
     }
 }

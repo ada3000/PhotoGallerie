@@ -40,25 +40,5 @@ namespace PhotoGalerie
             JavaScriptSerializer ser = new JavaScriptSerializer();
             ToolBarData = ser.Serialize(folderInfo.Folders);
         }
-
-        private int UserId
-        {
-            get
-            {
-                var indentity = User.Identity as FormsIdentity;
-                //var repo = new SimpleRepository<User>();
-                var userInfo = JsonConvert.DeserializeObject<User>(indentity.Ticket.UserData);
-                return userInfo.Id;
-            }
-        }
-
-        private int UserRoleId
-        {
-            get
-            {
-                var repo = new SimpleRepository<UserRole>();
-                return repo.All().First(r => r.UserId == UserId).RoleId;
-            }
-        }
     }
 }

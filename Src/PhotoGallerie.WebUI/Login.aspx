@@ -15,6 +15,7 @@
     <link href="Content/font-awesome.css" rel="stylesheet" />
     <link href="Content/alertifyjs/alertify.min.css" rel="stylesheet" />
     <link href="Content/alertifyjs/themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/bootstrap.css" rel="stylesheet" />
 
     <script type="text/javascript" src="Js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="Js/jquery.event.move.js"></script>

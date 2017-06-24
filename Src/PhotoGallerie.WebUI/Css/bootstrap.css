@@ -1,0 +1,26 @@
+﻿.btn-primary {
+    color: #fff;
+    background-color: #b84405;
+    border-color: #b84204;  
+}
+
+.btn-primary:hover,
+.btn-primary.focus, .btn-primary:focus,
+.btn-primary.active, .btn-primary:active, 
+.open>.dropdown-toggle.btn-primary,
+.btn-primary:active.focus, 
+.btn-primary:active:hover, 
+.open>.dropdown-toggle.btn-primary:focus, 
+.open>.dropdown-toggle.btn-primary:hover 
+{
+    color: #fff;
+    background-color: #9c3801;
+    border-color: #732a02;
+}
+
+.form-control:focus {
+    border-color: #d89745;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgb(210, 134, 56);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgb(210, 134, 56);
+}

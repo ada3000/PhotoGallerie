@@ -111,6 +111,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Css\bootstrap.css" />
     <Content Include="DownloadFolder.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -200,7 +201,6 @@
     <Compile Include="Models\AuthModel.cs" />
     <Compile Include="Code\BinaryCache.cs" />
     <Compile Include="Controllers\TestAController.cs" />
-    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="FolderImage.aspx.cs">
       <DependentUpon>FolderImage.aspx</DependentUpon>

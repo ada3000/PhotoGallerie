@@ -12,7 +12,7 @@
             $.get(
                 //"/api/auth/login",
                 "LoginAuth.aspx",
-                { login: self.login(), pwd: self.pwd(), rnd: Math.random() })
+                { login: self.login(), pwd: self.pwd(), rnd: Math.random(), action: "login" })
                 .done(function (data)
                 {
                     if (data && data.Status == "Error")
